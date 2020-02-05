@@ -62,9 +62,8 @@
     <option value='html5'>html5</option>
     <option value='css'>css</option>
     <option value='javascrept'>javascrept</option>
-    </optgroup>
-    <select name='
-    <optgroup label="framework">
+    </optgroup>    
+    <optgroup label='framework'>
     <option value='ajax'>ajax</option>
     <option value='mybatis'>mybatis</option>
     <option value='node.js'>node.js</option>
