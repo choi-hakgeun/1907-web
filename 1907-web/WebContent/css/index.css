@@ -13,15 +13,26 @@
 	height:153px;
 }
 #nav{
-	background-color:#80ffff;
+	background-color:#8000ff;
 	color:#ff0;
 	overflow:hidden;
 }
-#nav li{    
-	float:right;
-	list-style:none;
-	margin-right:8px;
+#nav ul{
+	text-align:right;
+	margin:4px;
+	padding:0px;
 }
+#nav li{
+	display:inline;	
+	list-style:none;
+	text-align:center;
+}
+#nav li a{
+	text-decpration:none;
+	padding:5px;
+	color:#ff0;
+}
+
 #nav li:hover{
 	background-color:#777;
 	height:100px;
@@ -53,4 +64,11 @@
 #footer{
 	height:80px;
 	background-color:#bbb;
+	text-align:center;
+	padding-top:20px;
+	padding-bottom:20px;
+	box-sizing:border-box;
+}
+#footer font{
+	font-weight:bold;	
 }

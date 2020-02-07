@@ -26,11 +26,11 @@
     <header id='header' >HEADER</header>
     <nav id='nav' >
       <ul>
-        <li>menu1</li>
-        <li>menu2</li>
-        <li>menu3</li>
-        <li>menu4</li>
-        <li>menu5</li>
+        <li><a href= './html5/index_html.jsp'>HTML</a></li>
+        <li><a href='./css/index_css.jsp'>CSS</a></li>
+        <li><a href='#'>menu3</a></li>
+        <li><a href='#'>menu4</a></li>
+        <li><a href='#'>menu5</a></li>
       </ul>
     </nav>
     
@@ -39,7 +39,7 @@
        <div id='main_content'>Main Content</div>
        <aside id='aside'>ASIDE</aside>
     </div>
-    <footer id='footer'>FOOTER</footer>
+    <footer id='footer'>naver</footer>
 </div>
 
 
