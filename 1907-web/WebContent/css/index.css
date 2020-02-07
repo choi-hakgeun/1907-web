@@ -6,23 +6,27 @@
 	
 }
 #header{
-	background-color:#fee;
-	height:150px;
-	margin-bottom:3px;
+	overflow:visible;
+	background-image:url('../images/header_back.png');
+	background-repeat:no-repeat;
+	background-position:center;
+	height:153px;
 }
 #nav{
-	background-color:#111;
+	background-color:#80ffff;
 	color:#ff0;
 	overflow:hidden;
 }
-#nav li{
-	float:left;
+#nav li{    
+	float:right;
 	list-style:none;
 	margin-right:8px;
 }
 #nav li:hover{
 	background-color:#777;
-	color:#333;
+	height:100px;
+	color:#333;	
+	
 	cursor:pointer;
 }
 
