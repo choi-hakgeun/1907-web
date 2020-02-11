@@ -46,6 +46,30 @@ height:150px;
 let str = '';
 let r = document.getElementById('result');
 let chk = [];
+//공통 호출 함수-----------------
+function Gen(){
+	chk.length = 0; //배열의 초기화
+	for(v of frm.chk){ //v에는 checkbox 자체가 대입
+		if(v.checked){
+			chk.push(v.value);
+		}
+	}
+	return chk;
+}
+//즉시실행 함수----
+( function(){
+	str = '즉시 실행 함수 : ' +Gen();
+	r.innerHTML = str;
+}() );
+
+//익명형
+/*  
+ 강사님코드
+ frm.btn1.onclick = function(){
+	 str = '<li>익명함수 : '+chk;
+	 r.innerHTML = str;
+} */
+
  frm.btn1.onclick = function(){
 	for(x in frm.chk){
 		if(frm.chk[x].checked){
@@ -55,6 +79,10 @@ let chk = [];
 	str = '<li>익명함수 : '+chk;
 	r.innerHTML = str;
 } 
+//callback 함수--------
+ /* 강사님 코드
+ frm.btn2.onclick = abc;
+  */
  
  frm.btn2.onclick = abc;
     function abc(){    	
@@ -66,7 +94,35 @@ let chk = [];
 	str = '<li>callback 함수식 : ' +chk;
 	r.innerHTML = str;
  }
- frm.btn4.onclick = function   
+
+//함수식
+let func = function(){
+	chk.length = 0; //배열의 초기화
+	for(v of frm.chk){
+		if(v.checked){
+			food.push(v.value);
+		}
+	}
+	str = '함수식 : ' +chk;
+	r. innerHTML = str;
+}
+frm.btn3.onclick = func;
+
+//선언적 함수-------------------
+//호출되는 function Gen{}의 유형이 선언적 함수.
+frm.btn4.onclick = function(){
+	str = '선언적 함수 : ' + Gen();
+	r.innerHTML = str;
+}
+
+//화살표 함수----------------------
+//()=>{  }
+let arrow = ()=>{
+	str = 'arrow 함수 : ' +Gen();
+	r.innerHTML = str;
+}
+
+frm.btn5.onclick = arrow;
 </script>
 
 </body>
