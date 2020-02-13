@@ -19,7 +19,7 @@
     <input type='button' value='저장' name='btnSave' />
     <input type='button' value='목록' name='btnSelect' />
 </form>
-<script src='board.js'></script>
 
+<script src='board.js'></script>
 </body>
 </html>

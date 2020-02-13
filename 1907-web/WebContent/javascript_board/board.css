@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+
+form>label{
+	display: inline-block;	
+	width:70px;	
+}
+form>textarea{
+	margin-top:70px;	
+}
+#hit{
+	border:0
+}
+#title{
+	background-color:#777;
+	padding:3px;
+	color:#fff;
+}
+#list>div{
+	padding:3px;
+}
+#list>div:last-of-type{
+	border-bottom:3px solid #888;
+}
+#brd_select{
+	width:600px;
+	poisition:relative;
+}
+#findStr{
+	position:absolute;
+	right:45px;
+}
+#btnSearch{
+	position:absolute;
+	right:0
+}
+div>span{
+	display:inline-block;
+}
+.serial {width:50px;}
+.subject{width:200px;}
+.mName{width:100px;}
+.
+#list>div:last-of-type{
+	border-bottom
+}
