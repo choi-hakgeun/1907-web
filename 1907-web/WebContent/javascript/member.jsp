@@ -21,7 +21,7 @@
 </form>
 <script>
 frm.btn.onclick = function(){
-	let w = window.open('zip.jsp', 'w', '');
+	let w = window.open('zip.jsp', 'w', 'width=300px, height=300px');//세번째 것은 윈도우 옵션, 창의 크기나 주소입력창, 상태표시줄 유무 등등
 }
 
 frm.btn2.onclick = function(){ //daum api

@@ -42,9 +42,10 @@
     <input type='range' min='0' max='20000' value='10000' />
     <br/>
     <label>증명사진</label>
-    <input type='file' name='photo' />
+    <input type='file' name='photo' id='photo'/><br/>
+    <img width='200px' height='300px' id='target' src='http://placehold.it/180X200' />    
     <br/>
-    <label>간단한 자기소개</label>
+    <label>간단한 자기소개</label><br/>
     <textarea rows="10" cola="60" name='info'></textarea>
     
     <br/>
@@ -80,6 +81,24 @@
 </form>
 
 </div>
+<script>
+	let btn = document.querySelector('#photo');
+	btn.onchange = function(event){
+		let ele = event.srcElement;
+		
+		let url = ele.files[0];
+		let reader = new FileReader();
+		reader.readAsDataURL(url);
+		
+		reader.onload=function(ev){
+			let img = new Image();
+			img.src = ev.target.result;
+			document.getElementById('target').src = img.src;
+		}
+	}
+
+</script>
+
 
 </body>
 </html>

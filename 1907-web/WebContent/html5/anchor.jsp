@@ -10,7 +10,7 @@
 <h4>현재 페이지에 링크 연결</h4>
 <a href='http://www.jobtc.kr'>우리카페</a><br/>
 <a href='http://www.naver.com'>네이버</a><br/>
-<a href='http://192.168.0.18:8888/1907-web/javascript/array_sort.jsp'>갓수현</a><br/>
+<a href='http://192.168.0.18:8888/1907-web/javascript/image_preview_2.jsp'>갓수현</a><br/>
 
 <h4>새 페이지(탭)에 링크 연결</h4>
 <a href='http://www.jobtc.kr' target='_blank'>우리카페</a><br/>
