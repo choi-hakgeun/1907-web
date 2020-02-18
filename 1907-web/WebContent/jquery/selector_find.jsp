@@ -37,7 +37,7 @@ $(xmlDoc).find('friend').each(function(index, item){
 	output +='</div>';
 	$('#result').innerHTML += output;
 })
-
+$('#result')
 
 </script>
 
