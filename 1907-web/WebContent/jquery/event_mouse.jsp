@@ -11,12 +11,12 @@
 	<canvas id="canvas" width="700" height="400" style="border: 3px solid black">
 	</canvas>
 <script>
-	$(document).ready(function(){
 		//변수를 선언합니다.
-		var canvas = document.getElementById('canvas');
-		var context = canvas.getContext('2d');
+		let canvas = document.getElementById('canvas');
+		let context = canvas.getContext('2d');
 		context.strokeStyle = 'rgb(255,0,0)';
 		let fleg=false;//mousedown일때  true, mouseup일때 false	
+	$(document).ready(function(){
 	//이벤트를 연결합니다.
 	$(canvas).on({
 		mousedown : function (event){

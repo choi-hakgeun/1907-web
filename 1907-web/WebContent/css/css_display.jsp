@@ -9,7 +9,7 @@
     div{
       border:2px solid #000;      
       width:200px; height:100px;
-      display : inline-block;
+      display : inline-block;      
       /*float:left;*/
     }
     #span>span{
