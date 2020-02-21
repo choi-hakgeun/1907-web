@@ -12,7 +12,15 @@
 </head>
 <body>
 <h2>회원관리</h2>
+<form name='frm' id='frm'>
+	<input type='text' name='findStr' id='findStr'>
+	<input type='button' value='검색' id='btnFind'>
+</form>
 <div id='result'></div>
+<script>
+init();
+</script>
+
 
 </body>
 </html>

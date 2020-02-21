@@ -1,10 +1,10 @@
 package bean;
 
 public class MemberVo {
-	String mId;
+	/*String mId;
 	String mName;
 	Date rDate;
-	int geade;
+	int geade;*/
 	
 
 }

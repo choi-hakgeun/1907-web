@@ -4,7 +4,7 @@
  */
 let xhr = new XMLHttpRequest();
 
-let init = function(){
+/*let select = function(){
 	xhr.open('get', 'member_select.jsp');
 	xhr.send();
 	xhr.onreadystatechange = function(){
@@ -12,7 +12,7 @@ let init = function(){
 			$('#result').html(xhr.responseText);
 		}
 	}
-}
+}*/
 
 let init = function(){
 	xhr.open('get', 'member_select_result.jsp');
@@ -20,21 +20,21 @@ let init = function(){
 	xhr.onreadystatechange = function(){
 		if(xhr.status==200 && xhr.readyState==4){
 			let json = JSON.parse(xhr.responseText);
-			let data = ' ';
-			for( d of json){
+			let data = '';
+			for( d of json){				
 				data +="<div class='item'>"
 					 + " <span class='mId'>" + d.mId +"</span>"
 					 + " <span class='mName'>" + d.mName +"</span>"
 					 + " <span class='rDate'>" + d.rDate +"</span>"
 					 + " <span class='grade'>" + d.grade +"</span>"
-					 + " </div> "
+					 + " </div>";
 			}
-			$('#result').html(str);
+			$('#result').html(data);
 		}
 	}
 }
-if( $('#btnFind') != null){
+/*if( $('#btnFind') != null){
 	$('#btnFind').click(function(){
 		select();
 	})	
-}
+}*/
