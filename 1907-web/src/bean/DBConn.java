@@ -3,12 +3,16 @@ package bean;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DBConn {//���ȭ	
+public class DBConn {
 	public static Connection getConn() {
+		return getConn("hr","hr");
+	}
+	public static Connection getConn(String id, String pwd) {		
+		
 		String driver = "oracle.jdbc.driver.OracleDriver";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String dbUser = "hr";
-		String dbPwd = "hr";
+		String url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
+		String dbUser = id;
+		String dbPwd = pwd;
 		Connection conn = null;
 		try {
 			Class.forName(driver).newInstance();
@@ -20,5 +24,7 @@ public class DBConn {//���ȭ
 		}
 		return conn;
 	}
-
+	public static void maid(String[] args) {
+		DBConn.getConn();
+	}
 }
