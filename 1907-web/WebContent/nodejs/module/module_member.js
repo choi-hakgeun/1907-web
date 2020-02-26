@@ -1,40 +1,40 @@
 /**
  * module_member.js
- * date : 2020.02.26
+ * 2020.02.26
  */
-let array = [];
+var mm = {};
+mm.list = [];
 
-exports.Data = function(id, name, phone, address){
-	this.id = id;
-	this.name = name;
-	this.phone = phone;
-	this.address = address;	
+mm.Data= function(id, name, phone, address){
+   this.id = id;
+   this.name= name;
+   this.phone = phone;
+   this.address = address;
 }
 
-exports.input = function(Data){
-	array.push(data);
+mm.input= function(Data){ //배열에 저장
+   mm.list.push(Data);
+   
+   
 }
-exports.output = function(){
-	for(d of array){
-		console.log(array.id);
-		console.log(array.name);
-		console.log(array.phone);
-		console.log(array.address);
-		console.log("------------------------");
-	}
-	
+mm.select= function(id){
+   for(let i =0; i <mm.list.length ; i++){
+      if(mm.list[i].id == id){
+         console.log('------------------------');
+         console.log('id : %s' , mm.list[i].id);
+         console.log('name : %s', mm.list[i].name);
+         console.log('phone : %s', mm.list[i].phone);
+         console.log('address : %s', mm.list[i].address);
+         console.log('------------------------');
+      }
+   }
 }
-exports.select = function(id){
-	let i = (array.indexOf("id")!==-1)
-	console.log(array[i].id);
-	console.log(array[i].name);
-	console.log(array[i].phone);
-	console.log(array[i].address);
-	
-	/*for(let i=0; i<array.length ; i++){
-		if(id == array.id){
-			console.log
-		}		
-	}*/
-	
+
+mm.output= function(){
+   console.log("회원목록---------")
+   for( d of mm.list){
+      console.log('%s \t %s \t %s \t %s', d.id, d.name, d.phone, d.address);
+      
+   }
 }
+module.exports = mm;
