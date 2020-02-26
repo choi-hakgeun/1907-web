@@ -11,6 +11,7 @@ let findStr='';//화면이 바꾸어도 검색어를 유지하기 휘한 변수
  */
 let init = function(){
 	$.get('member_select.jsp', function(data){
+		
 		$('#form').html(data); //검색 폼 표시
 		
 		// 검색 버튼이 클릭된 경우 목록을 가져와 표시
@@ -80,7 +81,7 @@ let view = function(mId){
 		
 		$.post('member_get.jsp', "mId="+mId, function(data){
 			let json = JSON.parse(data);
-			frm.mId.value = json.mId;
+			frm.mId.value = json.mId; //$('#mId').val(json.mId);
 			frm.mName.value = json.mName;
 			frm.rDate.value = json.rDate;
 			frm.grade.value = json.grade;
