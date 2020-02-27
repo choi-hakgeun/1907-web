@@ -40,6 +40,7 @@ server.listen(port, hostName);
 console.log('http://%s:%d 로 접속하세요', hostName, port);
 
 function connect(){
+	
 	db.getConnection(
 		{
 			user 			: dbConf.user, 
@@ -53,18 +54,20 @@ function connect(){
 				console.log(err.message);
 				return;
 			}
+	
 			console.log('connection OK....');
 			
 			let sql = "select * from member";
 			connection.execute(sql, function(err2, result){
 				console.log('row : ' + result.rows);
+				disCon(connection);
 			});
-			disCon(connection);
 		});	
 }
 
-function disCon(connection){
-	connection.close(function(err){
+function disCon(conn){
+	console.log('disconnection.....');
+	conn.close(function(err){
 		if(err){
 			console.log(err.message);			
 		}
