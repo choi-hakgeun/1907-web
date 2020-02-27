@@ -4,10 +4,11 @@
  * get, post, put, del 타입의 라우터로 데이터 처리
  */
 var express = require('../begin/node_modules/express');
-var app = express();
 var bodyParser = require('../begin/node_modules/body-parser');
+
+var app = express();
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:false}));//아직 쓸모는 없지만 교재에 있음.
 //변수를 선언합니다.
 var items = [
 	{'name' : '우유', 'price' : 2000},
@@ -21,7 +22,7 @@ app.get('/products', function(req, resp){
 	resp.send(items);
 });
 
-app.get('/products/:id', function(req, resp){
+app.get('/products/:id', function(req, resp){//:id는 호환성이 없어서 비추
 	//변수를 선언합니다.
 	var id = Number(req.params.id);
 	
@@ -84,7 +85,7 @@ app.put('/products/:id', function (req, resp){
 });
 
 app.del('/products/:id', function(req, resp){
-	//변수를 선언합니다.
+	//변수를 선언합니다.	
 	var id = Number(req.params.id);
 	
 	if(isNaN(id)){
