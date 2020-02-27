@@ -22,6 +22,8 @@ const server = http.createServer( function(req, resp){
 		return;
 	}
 	
+	connect()//커넥트 호출
+	
 	resp.statusCode=200;
 	resp.setHeader('Content-type', 'text/html;charset=utf-8');
 		
@@ -36,3 +38,26 @@ const server = http.createServer( function(req, resp){
 
 server.listen(port, hostName);
 console.log('http://%s:%d 로 접속하세요', hostName, port);
+
+function connect(){
+	db.getConnection(
+		{
+			user 			: dbConf.user, 
+			password 		: dbConf.password,
+			connectString   : dbConf.connectionString
+			
+		}, 
+		
+		function(err, connection){
+			if(err){
+				console.log(err.message);
+				return;
+			}
+			console.log('connection OK....');
+			
+			let sql = "select * from member";
+			connection.execute(sql, function(err2, result){
+				console.log('row : ' + result.rows);
+			});			
+		});	
+}
