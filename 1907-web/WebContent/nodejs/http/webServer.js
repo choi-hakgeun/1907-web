@@ -58,6 +58,15 @@ function connect(){
 			let sql = "select * from member";
 			connection.execute(sql, function(err2, result){
 				console.log('row : ' + result.rows);
-			});			
+			});
+			disCon(connection);
 		});	
+}
+
+function disCon(connection){
+	connection.close(function(err){
+		if(err){
+			console.log(err.message);			
+		}
+	})
 }
