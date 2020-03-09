@@ -2,29 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>select.html</title>
-<link rel='shortcut icon' href="#">
-<script src='./lib/jquery-3.4.1.js'></script>
-<script src='./lib/member.js'></script>
+<title>회원조회</title>
+<link rel='stylesheet' type='text/css' href='member.css'>
+<script src='jquery-3.4.1.js'></script>
+<script src='member.js'></script>
 </head>
 <body>
-<div id='select'>
-	<h3>회원조회</h3>
-	<form name='frm' id='frm' method='post'>
-		<input type='button' value='회원추가' id='btnInsert'/>
-		<div>
-			<input type='text' name='findStr' id='findStr'/>
-			<input type='button' value='검색' id='btnFind'/>
-		</div>
-	</form>
-	<div id='title'>
-	<div id='item' onclick='view("aaaa")'>
+<%
+var f = '';
+if(findStr !=null) f=findStr;
+%>
+
+<h3>회원조회</h3>
+<div name='select' class='select' id='select'>
+<form name='frm' id='frm' method='post'>
+	<input type='button' value='회원추가' id='btnInsert'/>
+	<input type='text' name='findStr' value = '<%=f%>' id='findStr'/>
+	<input type='button' value='검색' id='btnFind'/>
+</form>
+	<div id='title'>	
 		<span class='mId'>학번</span>
 		<span class='mName'>성명</span>
 		<span class='rDate'>등록일</span>
-		<span class='grade'>학년</span>
-		</div>
+		<span class='grade'>학년</span>		
 	</div>
-<script>select();</script>
+<div id='result'>
+<%
+	for(var i=0 ; i<data.rows.length; i++){
+		let d = data.rows[i];
+%>
+	<div id='item' onclick='view("<%=d[0]%>")'>
+		<span class='mId'><%=d[0]%></span>
+		<span class='mName'><%=d[1]%></span>
+		<span class='rDate'><%=d[2]%></span>
+		<span class='grade'><%=d[3]%></span>
+		</div>
+		<% } %>
+	</div>
+</div>
 </body>
 </html>

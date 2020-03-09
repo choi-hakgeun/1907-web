@@ -7,7 +7,7 @@ let http = require('http'); //http모듈을 사용하기위해 읽어드림
 
 let db = require('../begin/node_modules/oracledb'); //오라클모듈을 사용하기위해 읽어드림
 let dbConf = require('./lib/dbConfig');
-db.autoCommti = true;
+db.autoCommit = true;
 
 let express = require('../begin/node_modules/express');
 let bodyParser = require('../begin/node_modules/body-parser');
@@ -23,16 +23,16 @@ var config = {
 }
 var app = express();
 app.engine('html', require('../begin/node_modules/ejs').renderFile);
-app.use(express.static(__dirname + '/css'));
+app.use(express.static(__dirname + '/css')); //정적경로명을 만들어 경로명을 만들지 않아도 됨 
 app.use(express.static(__dirname + '/lib'));
-app.use(bodyParser.rulencoded( {extended : true } ) )
+app.use(bodyParser.urlencoded( {extended : true } ) )
 
 
 var server = http.createServer(app);
 var conn; //db connection object
 
 function connect(){
-	db.getConnection(config, function(err, connction){
+	db.getConnection(config, function(err, connection){
 		if(err){
 			console.log('connection fail...' + err);			
 		}else{
@@ -94,7 +94,7 @@ function select(req, resp){
 server.listen(port, hostName);
 console.log('http://%s:%d 로 접속하세요', hostName, port);
 
-function connect(){
+/*function connect(){
 	
 	db.getConnection(
 		{
@@ -127,4 +127,4 @@ function disCon(conn){
 			console.log(err.message);			
 		}
 	})
-}
+}*/
