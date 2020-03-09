@@ -30,8 +30,8 @@ form>label{
 	
 }
 #select span, .item span{ display: inline-block;}
-.item:hover{
-	background: #ccc;
+#item:hover{
+	background: #8080ff;
 	font-weight:bold;
 	cursor: pointer;
 }
@@ -55,7 +55,7 @@ form>label{
 /* 처리 결과 */
 /*------------------------------------------*/
 
-.result_ok{
+.result_ok{	
  border:2px solid #00f;
  border-radius:10px;
  background-color:#aaf;	

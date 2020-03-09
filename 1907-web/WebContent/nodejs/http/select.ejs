@@ -10,7 +10,7 @@
 <body>
 <%
 var f = '';
-if(findStr !=null) f=findStr;
+if(findStr !=null) f = findStr;
 %>
 
 <h3>회원조회</h3>
@@ -19,7 +19,9 @@ if(findStr !=null) f=findStr;
 	<input type='button' value='회원추가' id='btnInsert'/>
 	<input type='text' name='findStr' value = '<%=f%>' id='findStr'/>
 	<input type='button' value='검색' id='btnFind'/>
+	<input type='hidden' name = 'mId' />
 </form>
+
 	<div id='title'>	
 		<span class='mId'>학번</span>
 		<span class='mName'>성명</span>
@@ -40,5 +42,7 @@ if(findStr !=null) f=findStr;
 		<% } %>
 	</div>
 </div>
+
+<script>btnFunc()</script>
 </body>
 </html>

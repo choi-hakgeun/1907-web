@@ -3,45 +3,57 @@
  */
 
 let btnFunc = function(){
-	if( $('#btnList')!=null){
-		$('#btnList').click(function(){
-			location.href='select.html';
+	if( $('#btnFind')!=null){
+		$('#btnFind').click(function(){
+			$('#frm').attr('action', 'select').submit();
 		})
-	}
-	
+	}	
 	if( $('#btnInsert')!=null){
 		$('#btnInsert').click(function(){
-			location.href='insert_form.html';
+			$('#frm').attr('action', 'insert').submit();
+		})
+	}
+	if( $('#btnList')!=null){
+		$('#btnList').click(function(){
+			$('#frm').attr('action', 'select').submit();
 		})
 	}
 	if( $('#btnRegister')!=null){
 		$('#btnRegister').click(function(){
-			location.href='insert_result.html';
+			$('#frm').attr('action', 'insertR').submit();
 		})
 	}
+	if( $('#btnDelete')!=null){
+		$('#btnDelete').click(function(){
+			let yn = confirm("정말???");
+			if(yn){
+				$('#frm').attr('action', 'deleteR').submit();				
+			}
+		});
+	}
+	/*
+	
 	if( $('#btnModify')!=null){
 		$('#btnModify').click(function(){
-			location.href='modify_form.html';
+			$('#frm').attr('action', 'modify').submit();
 		})
 	}
 	
 	if( $('#btnUpdate')!=null){
 		$('#btnUpdate').click(function(){
-			location.href='modify_result.html';
+			$('#frm').attr('action', 'modifyR').submit();
 		})
 	}	
-	if( $('#btnDelete')!=null){
-		$('#btnDelete').click(function(){
-			let yn = confirm("정말???");
-			if(yn){
-				location.href='delete_result.html';				
-			}
-		});
-	}
-	
+	*/
 }
 
-let selectOne = function(mId){
+let view = function(mId){
+	frm.mId.value = mId;
+	frm.method = 'post';
+	$('#frm').attr('action', 'view').submit();
+}
+/*
+ let selectOne = function(mId){
 	btnFunc();	
 }
 let select = function(){
@@ -51,9 +63,6 @@ let select = function(){
 let insert = function(){
 	btnFunc();
 	trm.rDate.valueAsDate = new Date();
-}
-let view = function(mId){
-	location.href = 'view.html';
 }
 
 let update = function(){
@@ -67,3 +76,4 @@ let deleteF = function(mId){
 let modify = function(mId){
 	btnFunc();	
 }
+*/
