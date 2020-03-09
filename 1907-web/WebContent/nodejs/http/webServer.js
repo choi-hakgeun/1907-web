@@ -3,38 +3,93 @@
  * date : 2020.02.27
  * 웹서버 구축 
  */
-let http = require('http');
-let fs = require('fs');
+let http = require('http'); //http모듈을 사용하기위해 읽어드림
 
-let db = require('../begin/node_modules/oracledb');
+let db = require('../begin/node_modules/oracledb'); //오라클모듈을 사용하기위해 읽어드림
 let dbConf = require('./lib/dbConfig');
+db.autoCommti = true;
+
+let express = require('../begin/node_modules/express');
+let bodyParser = require('../begin/node_modules/body-parser');
 
 const hostName = 'localhost';
 const port = 4000;
 
-const server = http.createServer( function(req, resp){
-	let url = req.url;
-	
-	//파비콘 제어	
-	if(req.url == './favicon.ico'){
-		resp.writeHead(404);
-		resp.end;
-		return;
-	}
-	
-	connect()//커넥트 호출
-	
-	resp.statusCode=200;
-	resp.setHeader('Content-type', 'text/html;charset=utf-8');
+var config = {
+	user			: dbConf.user,
+	password		: dbConf.password,
+	connectString   : dbConf.connectString 
 		
-	/*resp.write('<li>url: '+ url);
-	resp.write('<li>dirname : ' +__dirname);//어떤 파일을 요청한 경로명
-	resp.write('<br/>방가방가');
-	resp.end();*/
-	//물음표 뒷부분을 스플릿으로 자른 후 배열에 넣어는 변수를 선언하고...
-	resp.write(fs.readFileSync(__dirname + url));
-	resp.end();
-});
+}
+var app = express();
+app.engine('html', require('../begin/node_modules/ejs').renderFile);
+app.use(express.static(__dirname + '/css'));
+app.use(express.static(__dirname + '/lib'));
+app.use(bodyParser.rulencoded( {extended : true } ) )
+
+
+var server = http.createServer(app);
+var conn; //db connection object
+
+function connect(){
+	db.getConnection(config, function(err, connction){
+		if(err){
+			console.log('connection fail...' + err);			
+		}else{
+			console.log('connection.........');
+			conn = connection;
+		}
+	})
+}
+connect();
+
+app.post('/insert', function(req, resp){
+	
+})
+app.post('/insertR', function(req, resp){
+	
+})
+app.post('/modify', function(req, resp){
+	
+})
+app.post('/modifyR', function(req, resp){
+	
+})
+app.post('/deleteR', function(req, resp){
+	
+})
+app.post('/view', function(req, resp){
+	
+})
+//페이지 정보가 없이 단순히 domain 정보만 들어온 경우
+app.all('/', function(req, resp){
+	select(req, resp);
+})
+app.all('/select', function(req, resp){
+	select(req, resp);
+})
+
+function select(req, resp){
+	let findStr='';
+	if(req.method=='POST'){
+		findStr = req.bodyfindStr // /select?findStr=abc  request.getParameter("findStr"); 와 같은것.		
+	}
+	let sql = "select mid, mname, to_char(rdate, 'rrrr-mm-dd') rdate, grade "
+			+ " from member "
+			+ " where mid like : id or mname like :id "
+			+ " order by mname asc ";
+	conn.execute( sql, ["%" + findStr +"%"], function(err, data) {//인수값이 하나만 있기 때문에 where 절에 like :id에 해당하는 두가지 부분에 다 들어감 
+		if(err){
+			console.log(err);			
+		}else{
+			console.log(data);
+			resp.render(__dirname + '/select.ejs',
+					   {'data' : data, 'findStr' : findStr })
+		}
+	});
+	
+}
+
 
 server.listen(port, hostName);
 console.log('http://%s:%d 로 접속하세요', hostName, port);
