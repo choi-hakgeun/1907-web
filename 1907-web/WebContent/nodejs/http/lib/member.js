@@ -43,6 +43,10 @@ let btnFunc = function(){
 		})
 	}	
 }
+let insert = function(){
+	btnFunc();
+	trm.rDate.valueAsDate = new Date();
+}
 
 let view = function(mId){
 	frm.mId.value = mId;
@@ -56,12 +60,6 @@ let view = function(mId){
 let select = function(){
 	btnFunc();	
 }
-
-let insert = function(){
-	btnFunc();
-	trm.rDate.valueAsDate = new Date();
-}
-
 let update = function(){
 	btnFunc();	
 }
