@@ -31,20 +31,17 @@ let btnFunc = function(){
 			}
 		});
 	}
-	/*
 	
 	if( $('#btnModify')!=null){
 		$('#btnModify').click(function(){
 			$('#frm').attr('action', 'modify').submit();
 		})
-	}
-	
+	}	
 	if( $('#btnUpdate')!=null){
 		$('#btnUpdate').click(function(){
 			$('#frm').attr('action', 'modifyR').submit();
 		})
 	}	
-	*/
 }
 
 let view = function(mId){

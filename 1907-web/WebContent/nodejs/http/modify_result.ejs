@@ -2,14 +2,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>modify_result.html</title>
-<link rel='shortcut icon' href="#">
-<script src='./lib/jquery-3.4.1.js'></script>
-<script src='./lib/member.js'></script>
+<title>modify_result</title>
+<link rel='stylesheet' type='text/css' href='member.css'>
+<script src='jquery-3.4.1.js'></script>
+<script src='member.js'></script>
 </head>
 <body>
-<h3>정보가 수정됨...</h3>
+<h3><%=msg%></h3>
+<form name='frm' id='frm' method='post'>
 <input type='button' value='목록' id='btnList'>
+<input type='hidden' name='findStr' value='<%=findStr%>'>
+</form>
 <script>btnFunc();</script>
 </body>
 </html>
