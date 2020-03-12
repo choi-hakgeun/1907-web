@@ -5,41 +5,41 @@
 let btnFunc = function(){
 	if( $('#btnFind')!=null){
 		$('#btnFind').click(function(){
-			$('#frm').attr('action', 'select').submit();
+			$('#frm').attr('action', 'select.jsp').submit();
 		})
 	}	
 	if( $('#btnInsert')!=null){
 		$('#btnInsert').click(function(){
-			$('#frm').attr('action', 'insert').submit();
+			$('#frm').attr('action', 'insert.jsp').submit();
 		})
 	}
 	if( $('#btnList')!=null){
 		$('#btnList').click(function(){
-			$('#frm').attr('action', 'select').submit();
+			$('#frm').attr('action', 'select.jsp').submit();
 		})
 	}
 	if( $('#btnRegister')!=null){
 		$('#btnRegister').click(function(){
-			$('#frm').attr('action', 'insertR').submit();
+			$('#frm').attr('action', 'insert_result.jsp').submit();
 		})
 	}
 	if( $('#btnDelete')!=null){
 		$('#btnDelete').click(function(){
 			let yn = confirm("정말???");
 			if(yn){
-				$('#frm').attr('action', 'deleteR').submit();				
+				$('#frm').attr('action', 'delete_result.jsp').submit();				
 			}
 		});
 	}
 	
 	if( $('#btnModify')!=null){
 		$('#btnModify').click(function(){
-			$('#frm').attr('action', 'modify').submit();
+			$('#frm').attr('action', 'modify.jsp').submit();
 		})
 	}	
 	if( $('#btnUpdate')!=null){
 		$('#btnUpdate').click(function(){
-			$('#frm').attr('action', 'modifyR').submit();
+			$('#frm').attr('action', 'modify_result.jsp').submit();
 		})
 	}	
 }
@@ -51,7 +51,7 @@ let insert = function(){
 let view = function(mId){
 	frm.mId.value = mId;
 	frm.method = 'post';
-	$('#frm').attr('action', 'view').submit();
+	$('#frm').attr('action', 'view.jsp').submit();
 }
 /*
  let selectOne = function(mId){

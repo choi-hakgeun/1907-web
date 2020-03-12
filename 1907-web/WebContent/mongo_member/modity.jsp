@@ -5,8 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel='stylesheet' type='text/css' href='member.css'>
+<script src='../lib/jquery-3.4.1.js'></script>
+<!-- 점 하나는 같은폴더, 점 두개는 상위폴더 -->
+<script src='./member.js'></script>
 </head>
 <body>
-
+<div id='main'>
+<h3>회원수정</h3>
+<%
+	request.setCharacterEncoding("utf-8");
+	String findStr = request.getParameter("findStr");
+	String mId = request.getParameter("mId");
+	MongoMember
+%>
+</div>
 </body>
 </html>

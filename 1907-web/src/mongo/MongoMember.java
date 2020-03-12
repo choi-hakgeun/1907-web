@@ -20,22 +20,55 @@ public class MongoMember {
 		DB db = client.getDB("m1907");
 		  dbc = db.getCollection("member");
 	}
-	public void insert(String json) {
-		
+	public String insert(DBObject obj) {
+		String msg="";
+		try {
+			dbc.insert(obj);
+			msg="회원정보가 정상적으로 등록되었습니다.";			
+		}catch(Exception ex) {
+			msg = "저장중 오류 발생. " + ex.toString();
+		}finally {
+			return msg;
+		}
 	}
 	
-	public void modify(String json) {
-		
+	public String modify(BasicDBObject obj) {
+		String msg ="";
+		String mId = obj.getString("mId");
+		BasicDBObject query = new BasicDBObject();		
+		query.put("mId", mId);
+		try {
+			dbc.update(query, obj);
+			msg = "회원 정보가 수정되었습니다.";
+		}catch(Exception ex) {
+			msg = "수정중 오류 발생. " +ex.toString();			
+		}
+		return msg;
 	}
 	
-	public void delete(String json) {
-		
+	public String delete(String mId) {
+		String msg = "";
+		BasicDBObject obj = new BasicDBObject();
+		obj.put("mId", mId);
+		try {
+			dbc.remove(obj);
+			msg="회원 정보가 정상적으로 삭제 되었습니다.";			
+		}catch(Exception ex) {
+			msg = "삭제중 오류발생" +ex.toString();
+		}finally {
+			return msg;
+		}
 	}
 	
-	public String view(String json) {
-		String rValue = "";
-		
-		return rValue;
+	public DBObject view(String mId) {
+		DBObject o = null;
+		BasicDBObject obj = new BasicDBObject();
+		obj.put("mId", mId);
+		DBCursor cursor = dbc.find(obj);
+		if(cursor.hasNext()) {
+			o = cursor.next();
+		}		
+		return o;
 	}
 	public List<DBObject> select(String findStr) {
 		String rValue="";
