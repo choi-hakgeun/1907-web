@@ -53,22 +53,3 @@ let view = function(mId){
 	frm.method = 'post';
 	$('#frm').attr('action', 'view.jsp').submit();
 }
-/*
- let selectOne = function(mId){
-	btnFunc();	
-}
-let select = function(){
-	btnFunc();	
-}
-let update = function(){
-	btnFunc();	
-}
-
-let deleteF = function(mId){
-	btnFunc();	
-}
-
-let modify = function(mId){
-	btnFunc();	
-}
-*/

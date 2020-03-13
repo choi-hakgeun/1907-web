@@ -1,66 +1,42 @@
 @charset "UTF-8";
-#main{
-	display: inline-block;
+#main{	
 	width:550px;
 	margin:auto;
 }
-form>label{
-	display: inline-block;
-	width:70px;
-	text-align: right;
+form{	
+	width:100px;
+	margin-left:10px;
+	line-height:160%;
+	margin-bottom:4px;	
 	
 }
-/*------------------------------------------*/
-/* select */
-/*------------------------------------------*/
-#select{
+form div{
+	width:490px;
+	display: inline-block;
 	position: relative;
+	text-align:right;	
 }
-#select>form>div{
-	display: inline-block;
-	position: absolute;
-	right:10px;
+#title{
+	background-color: #000;
+	color:#fff;	
 }
-
-#select>#title{
-	background: #665;
-	color:#ff0;
-	margin-top:5px;
-	padding-bottom:4px;
-	
+#title>span, #result span{
+	display : inline-block;
+	width:130px;
 }
-#select span, .item span{ display: inline-block;}
-#item:hover{
-	background: #8080ff;
-	font-weight:bold;
+#result div:hover{
+	background-color:#ddd;
 	cursor: pointer;
 }
-
-.mId{   width : 150px;}
-.mName{ width : 170px;}
-.rDate{ width : 130px;}
-.grade{ width : 70px; text-align:center}
-
-/*------------------------------------------*/
-/* insert */
-/*------------------------------------------*/
-#insert>form>label{
-	display: inline-block;
-	width:60px;
-	text-align: right;
-	
+#result div:nth-child(5n){
+	border-bottom : 1px solid #f88;
 }
-
-/*------------------------------------------*/
-/* 처리 결과 */
-/*------------------------------------------*/
-
-.result_ok{	
- border:2px solid #00f;
- border-radius:10px;
- background-color:#aaf;	
- padding:20px;
- width:300px;
- margin:20px;
-	
+#result div:last-child{
+	border-bottom : 2px solid #88f;
+}
+#frm>label{
+	display:inline-block;
+	width:70px;
+	text-align:right;
+	margin-right:4px;
 }

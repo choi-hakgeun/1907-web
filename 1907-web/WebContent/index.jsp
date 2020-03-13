@@ -21,25 +21,30 @@
 <link rel='styleSheet' type='text/css' href='./css/index.css?Ver=1' />
 </head>
 <body>
-
+<%
+String inc = "./html5/index_html5.jsp";
+if(request.getParameter("inc") != null){
+	inc = request.getParameter("inc");
+}
+String sp = "./html5/anchor.jsp";
+if(request.getParameter("sp") != null){
+	sp = request.getParameter("sp");
+}
+%>
 <div id='main'>
-    <header id='header' >HEADER</header>
-    <nav id='nav' >
-      <ul>
-        <li><a href= './html5/index_html5.jsp'>HTML</a></li>
-        <li><a href='./css/index_css.jsp'>CSS</a></li>
-        <li><a href='#'>menu3</a></li>
-        <li><a href='#'>menu4</a></li>
-        <li><a href='#'>menu5</a></li>
-      </ul>
-    </nav>
-    
+    <!-- top.jsp -->
+    <%@include file="top.jsp" %>
     <div id='center'>
-       <div id='sub_menu'>SUB MENU</div>
-       <div id='main_content'>Main Content</div>
+       <div id='sub_menu'>
+       	<jsp:include page="<%=inc %>"/>
+       </div>
+        <div id='main_content'>
+        <jsp:include page="<%=sp %>"/>
+		</div>
        <aside id='aside'>ASIDE</aside>
     </div>
-    <footer id='footer'>naver</footer>
+    <%@include file="bottom.jsp" %>
+    <!-- bottom.jsp -->
 </div>
 
 

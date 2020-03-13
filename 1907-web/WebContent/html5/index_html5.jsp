@@ -9,7 +9,7 @@
 <body>
 <h3>html5</h3>
 <ol>
-  <li><a href='anchor.jsp'>anchor</a></li>
+  <li><a href='index.jsp?inc=./html5/index_html5.jsp&sp=./html5/anchor.jsp'>anchor</a></li>
   <li><a href='canvas_shadow.jsp'>canvas_shadow</a></li>
   <li><a href='canvas.jsp'>canvas</a></li>
   <li><a href='drowImage.jsp'>drowImage</a></li>
