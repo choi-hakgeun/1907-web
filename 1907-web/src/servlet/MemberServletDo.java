@@ -1,9 +1,11 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import bean.MemberDao;
 import bean.MemberVo2;
 
-public class MemberServletXML extends HttpServlet{
+@WebServlet("*.do")
+public class MemberServletDo extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,23 +22,9 @@ public class MemberServletXML extends HttpServlet{
 		String mId = request.getParameter("mId");
 		String mName = request.getParameter("mName");
 		String rDate = request.getParameter("rDate");
-		String grade = request.getParameter("grade");
-		
-		System.out.println("doPost");
-		System.out.println(mId);
-		System.out.println(mName);
-		System.out.println(rDate);
-		System.out.println(grade);
+		String grade = request.getParameter("grade");		
 		
 		resp.setContentType("text/html;charset=utf-8");
-		PrintWriter out = resp.getWriter();
-		out.print("<ul>");
-		out.print("<li>mId="+ mId);
-		out.print("<li>mName="+ mName);
-		out.print("<li>rDate="+ rDate);
-		out.print("<li>grade"+ grade);
-		out.print("</ul>");
-		out.close();
 		
 		MemberVo2 vo = new MemberVo2();
 		vo.setmId(mId);
@@ -45,11 +34,14 @@ public class MemberServletXML extends HttpServlet{
 		
 		MemberDao dao = new MemberDao();
 		String msg = dao.insert2(vo);
-		out.print("<h4>"+msg+"</h4>");;
 		
-		out.close();
+		//실행결과를 특정 페이지로 전달
+		String path = "/index.jsp?inc=/jsp/index_jsp.jsp&sp=/jsp/insert_result_do.jsp";
+		ServletContext cont = getServletContext(); //httpServlet을 상속받아서 사용가능
+		RequestDispatcher disp = cont.getRequestDispatcher(path);
+		request.setAttribute("msg", msg);
+		disp.forward(request, resp);
 		
-	}	
-
-
+	}
+	
 }

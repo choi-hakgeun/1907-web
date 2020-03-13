@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src='../lib/jquery-3.4.1.js'></script>
+<script src='./lib/jquery-3.4.1.js'></script>
 </head>
 <body>
 
@@ -57,7 +57,7 @@ $('#btnServletXML').click(function(){
 	$('#frm').attr('action', 'insert_r_servlet_xml.nhn').submit();
 })
 $('#btnServletAnno').click(function(){
-	$('#frm').attr('action', 'insert_r_servlet_anno.ano').submit();
+	$('#frm').attr('action', 'insert_r_servlet_anno.anno').submit();
 })
 $('#btnJstl').click(function(){
 	$('#frm').attr('action', 'insert_r_jstl.do').submit();

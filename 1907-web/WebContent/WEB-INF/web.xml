@@ -12,5 +12,5 @@
 	<servlet-mapping>
 		<servlet-name>member_xml</servlet-name>
 		<url-pattern>*.nhn</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
 </web-app>

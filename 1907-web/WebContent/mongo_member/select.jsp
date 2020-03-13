@@ -14,7 +14,7 @@
 <script src='member.js'></script>
 
 <style>
-#main{width:500px;}
+/* #main{width:500px;} */
 #title span, .item span{
 	display:inline-block;
 }
