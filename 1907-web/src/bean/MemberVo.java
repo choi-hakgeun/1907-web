@@ -1,5 +1,6 @@
 package bean;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -54,6 +55,13 @@ public class MemberVo {
 	}
 	public void setrDate(Date rDate) {
 		this.rDate = rDate;
+	}
+	public void setrDate(String rDate) {
+		try {
+			this.rDate = sdf.parse(rDate);			
+		}catch(ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	public int getGrade() {
 		return grade;

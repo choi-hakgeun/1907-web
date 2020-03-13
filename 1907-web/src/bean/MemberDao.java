@@ -81,6 +81,30 @@ public class MemberDao {
 			return msg;
 		}
 	}
+	public String insert2(MemberVo2 vo) {
+		String msg = "회원이 등록되었습니다.";
+		
+		try {
+			String sql = "insert into member values(?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1,  vo.getmId());
+			ps.setString(2,  vo.getmName());;
+			ps.setString(3,  vo.getrDate());
+			ps.setInt(4,  vo.getGrade());
+			
+			int r = ps.executeUpdate();
+			
+			if(r<1) {
+				throw new Exception();
+			}
+			
+		}catch(Exception ex){
+			msg = ex.toString();
+		}finally {
+			return msg;
+		}
+	}
+	
 	
 	public MemberVo view(String mId) {
 		System.out.println("Mid=" +mId);

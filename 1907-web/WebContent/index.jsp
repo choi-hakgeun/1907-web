@@ -23,10 +23,11 @@
 <body>
 <%
 String inc = "./html5/index_html5.jsp";
+String sp = "./html5/anchor.jsp";
+
 if(request.getParameter("inc") != null){
 	inc = request.getParameter("inc");
 }
-String sp = "./html5/anchor.jsp";
 if(request.getParameter("sp") != null){
 	sp = request.getParameter("sp");
 }
@@ -46,7 +47,24 @@ if(request.getParameter("sp") != null){
     <%@include file="bottom.jsp" %>
     <!-- bottom.jsp -->
 </div>
-
+<script>
+var path;
+var inc;
+function goUrl(p, i, sp){
+	localStorage.setItem('path', p);
+	localStorage.setItem('inc', i);
+	path = p;
+	inc = i;
+	let url = 'index.jsp?inc='+ path + inc + '&sp=' + path + sp;
+	location.href = url;
+}
+function goSub(sp){
+	path = localStorage.getItem('path');
+	inc  = localStorage.getItem('inc');
+	let url = 'index.jsp?inc='+ path + inc + '&sp=' + path + sp;
+	location.href = url;	
+}
+</script>
 
 </body>
 </html>

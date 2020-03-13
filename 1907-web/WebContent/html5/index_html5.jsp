@@ -9,22 +9,21 @@
 <body>
 <h3>html5</h3>
 <ol>
-  <li><a href='index.jsp?inc=./html5/index_html5.jsp&sp=./html5/anchor.jsp'>anchor</a></li>
-  <li><a href='canvas_shadow.jsp'>canvas_shadow</a></li>
-  <li><a href='canvas.jsp'>canvas</a></li>
-  <li><a href='drowImage.jsp'>drowImage</a></li>
-  <li><a href='font.jsp'>font</a></li>
-  <li><a href='gradient.jsp'>gradient</a></li>
-  
-  <li><a href='img.jsp'>img</a></li>
-  <li><a href='list.jsp'>select</a></li>
-  <li><a href='media.jsp'>media</a></li>
-  <li><a href='paragraph.jsp'>paragraph</a></li>
-  <li><a href='rotate.jsp'>rotate</a></li>
-  <li><a href='storage.jsp'>storage</a></li>
-  <li><a href='storage_form.jsp'>form(storage)</a></li>
-  <li><a href='table.jsp'>table</a></li>
-  <li><a href='worker.jsp'>worker</a></li>
+    <li><a href='#' onclick="goSub('anchor.jsp')">Anchor</a></li>
+	<li><a href='#' onclick="goSub('canvas.jsp')">canvas</a></li>
+	<li><a href='#' onclick="goSub('canvas_shadow.jsp')">canvas_shadow</a></li>
+	<li><a href='#' onclick="goSub('drawImage.jsp')">Anchor</a></li>
+	<li><a href='#' onclick="goSub('font.jsp')">font</a></li>
+	<li><a href='#' onclick="goSub('gradient.jsp')">gradient</a></li>
+	<li><a href='#' onclick="goSub('img.jsp')">img</a></li>
+	<li><a href='#' onclick="goSub('list.jsp')">list</a></li>
+	<li><a href='#' onclick="goSub('media.jsp')">media</a></li>
+	<li><a href='#' onclick="goSub('paragraph.jsp')">paragraph</a></li>
+	<li><a href='#' onclick="goSub('rotate.jsp')">rotate</a></li>
+	<li><a href='#' onclick="goSub('storage.jsp')">storage</a></li>
+	<li><a href='#' onclick="goSub('storage_form.jsp')">storage_form</a></li>
+	<li><a href='#' onclick="goSub('table.jsp')">table</a></li>
+	<li><a href='#' onclick="goSub(''worker.jsp'')">worker</a></li>
 </ol>
 
 </body>
