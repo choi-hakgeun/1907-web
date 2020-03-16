@@ -17,6 +17,22 @@
 		<c:set var='result' value='다음기회에~~' />
 	</c:if>
 	<li>result :${result }</li>
+	<li>기타사항 : 
+		<c:choose>
+			<c:when test="${param.score>=90 }">
+				전액 장학생입니다.
+			</c:when>
+			<c:when test="${param.score>=80 }">
+				반액 장학생입니다.
+			</c:when>
+			<c:when test="${param.score>=70 }">
+				수고하셨습니다.
+			</c:when>
+			<c:otherwise>
+				한 학기 더 수강 기회를 드립니다.
+			</c:otherwise>
+		</c:choose>
+	</li>
 </ul>
 </body>
 </html>
