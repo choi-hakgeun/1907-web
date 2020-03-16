@@ -9,6 +9,8 @@ public class MemberVo {
 	String mName;
 	Date   rDate;
 	int    grade;
+	String pwd;
+	
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String pattern = "{'mId' : '%s' , 'mName' : '%s' , "
@@ -38,6 +40,12 @@ public class MemberVo {
 			return json;
 		}
 	
+	public String getPwd() {
+			return pwd;
+	}
+	public void setPwd(String pwd) {
+			this.pwd = pwd;
+	}
 	public String getmId() {
 		return mId;
 	}

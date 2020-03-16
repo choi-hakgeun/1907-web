@@ -12,5 +12,14 @@
 	<li><a href='#' onclick="goSub('expression.jsp')">표현식</a></li>
 	<li><a href='#' onclick="goSub('insert.jsp')">요청방법</a></li>
 </ul>
+	<fieldset><legend>EL | JSTL</legend>
+	<ul>
+	<li><a href='#' onclick="goSub('el.jsp')">EL</a></li>
+	<li><a href='#' onclick="goSub('el_param.jsp')">el_param</a></li>
+	<li><a href='#' onclick="goSub('set.jsp')">set</a></li>
+	<li><a href='#' onclick="goSub('if.jsp')">if</a></li>
+	<li><a href='#' onclick="goSub('if_form.jsp')">if_form</a></li>
+	</ul>
+</fieldset>
 </body>
 </html>

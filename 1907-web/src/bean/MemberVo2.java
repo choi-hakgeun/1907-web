@@ -5,7 +5,14 @@ public class MemberVo2 {
 	String mName;
 	String rDate;
 	int    grade;
+	String pwd;
 	
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 	public String getmId() {
 		return mId;
 	}

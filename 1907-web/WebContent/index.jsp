@@ -13,6 +13,8 @@
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +64,14 @@ function goSub(sp){
 	path = localStorage.getItem('path');
 	inc  = localStorage.getItem('inc');
 	let url = 'index.jsp?inc='+ path + inc + '&sp=' + path + sp;
-	location.href = url;	
+	location.href = url;	//단순히 유알엘만 바뀜
+}
+function goSubmit(frm, sp){
+	path = localStorage.getItem('path');
+	inc  = localStorage.getItem('inc');
+	let url = 'index.jsp?inc='+ path + inc + '&sp=' + path + sp;
+	frm.action = url; //실제 값이 넘어감?
+	frm.submit();//포스트타입으로 넘어감
 }
 </script>
 

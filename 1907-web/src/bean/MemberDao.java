@@ -165,4 +165,26 @@ public class MemberDao {
 			return msg;
 		}
 	}
+	public boolean login(MemberVo vo) {
+		boolean result = false;
+		String id= vo.getmId();
+		String pwd = vo.getPwd();
+		
+		try {
+			String sql = "select  mId from member "
+					+ " where mId=? and pwd=?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pwd);
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {			
+				result = true;			
+			}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally {
+			return result;			
+		}
+	}
 }
