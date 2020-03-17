@@ -19,6 +19,9 @@
 	<li><a href='#' onclick="goSub('set.jsp')">set</a></li>
 	<li><a href='#' onclick="goSub('if.jsp')">if</a></li>
 	<li><a href='#' onclick="goSub('if_form.jsp')">if_form</a></li>
+	<li><a href='#' onclick="goSub('forEach.jsp')">forEach</a></li>
+	<li><a href='#' onclick="goSub('forTokens.jsp')">forTokens</a></li>
+	<li><a href='#' onclick="goSub('../jsp_member/select.jsp')">회원관리</a></li>
 	</ul>
 </fieldset>
 </body>

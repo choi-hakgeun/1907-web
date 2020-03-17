@@ -3,6 +3,7 @@ package bean;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class MemberVo {
 	String mId;
@@ -10,6 +11,7 @@ public class MemberVo {
 	Date   rDate;
 	int    grade;
 	String pwd;
+	List<MemberPhoto> photos;
 	
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		

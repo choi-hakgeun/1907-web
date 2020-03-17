@@ -33,6 +33,7 @@
 			<li><a href='#' onclick="goUrl('./mongo_member/', 'index_mongo_member.jsp', 'select.jsp')">Mongo Member</a></li>
 			<li><a href='#' onclick="goUrl('./nodejs',       '/http/index_nodejs.jsp',       '/begin/test2.js')">nodejs</a></li>
 			<li><a href='#' onclick="goUrl('./jsp/',       'index_jsp.jsp',       'insert.jsp')">jsp</a></li>
+			<li><a href='#' onclick="goUrl('./jsp_member/',       'index_jsp_member.jsp',       'insert.jsp')">jsp_member</a></li>
       </ul>
     </nav>
 <script>
