@@ -1,11 +1,15 @@
 package bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MemberVo2 {
 	String mId;
+	String pwd;	
 	String mName;
 	String rDate;
 	int    grade;
-	String pwd;
+	List<MemberPhoto> photos = new ArrayList<MemberPhoto>();;
 	
 	public String getPwd() {
 		return pwd;
@@ -15,7 +19,7 @@ public class MemberVo2 {
 	}
 	public String getmId() {
 		return mId;
-	}
+	}	
 	public void setmId(String mId) {
 		this.mId = mId;
 	}
@@ -36,6 +40,12 @@ public class MemberVo2 {
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+	public List<MemberPhoto> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<MemberPhoto> photos) {
+		this.photos = photos;
 	}
 
 }

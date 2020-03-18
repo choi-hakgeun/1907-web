@@ -13,6 +13,12 @@ public class MemberVo {
 	String pwd;
 	List<MemberPhoto> photos;
 	
+		public List<MemberPhoto> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<MemberPhoto> photos) {
+		this.photos = photos;
+	}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String pattern = "{'mId' : '%s' , 'mName' : '%s' , "

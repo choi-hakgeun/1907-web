@@ -41,9 +41,9 @@
 
 <hr/>
 <h4>file download</h4>
-<img src='../images/Penguins.jpg'><br/>
-<a href='../images/Penguins.jpg'>보기</a>
-<a href='../images/Penguins.jpg' download='test.jpg'>다운로드</a>
+<img src='../images/semple1.gif'><br/>
+<a href='../images/semple1.gif'>보기</a>
+<a href='../images/semple1.gif' download='test.jpg'>다운로드</a>
 
 <div id='1장'>
 여기는 1장 입니다.

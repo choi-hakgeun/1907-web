@@ -1,10 +1,11 @@
 <%@page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>insert</title>
 <link rel='stylesheet' type='text/css' href='./jsp_member/member.css'>
 <script src='./lib/jquery-3.4.1.js'></script>
@@ -13,9 +14,11 @@
 <body>	
 <div id='member_main'>
 	<h3>회원등록</h3>
-	<form name='frm' id='frm' method='post'>
+	<form name='frm' id='frm' method='post' enctype="multipart/form-data"> <!-- enctype을 사용하면 request.getParameter()-null이 된다(사용불가)-->
 		<label>아이디</label>
 		<input type='text' name='mId'><br /> 
+		<label>비밀번호</label>
+		<input type='password' name='pwd'><br />
 		<label>회원명</label>
 		<input type='text' name='mName'><br /> 
 		<label>등록일</label> 
@@ -34,13 +37,14 @@
 			<option value='10'>10 학년</option>
 		</select> <br /> 
 		<label>증명사진</label>
-		<input type='file' name='photo'/><br/>
-		<label></label> 
-		<input type='button' name='btnRegister' id='btnRegister' value='등록'> 
+		<input type='file' name='photo' id='btnPhoto'/><br/>
+		<label></label>
+		<input type='button' id='btnRegister' value='등록'> 
 		<input type='button' id='btnList' value='취소'>
-		<input type='hidden' name='findStr' id='findStr'value=''>
+		<input type='text' name='findStr' value='${param.findStr }'>
 	</form>
+	<img src='http://placehold.it/150x180' id='photo' width='150px' height='180px'/>
 </div>
-<script>btnFunc();</script>
+<script>insert();</script>
 </body>
 </html>
