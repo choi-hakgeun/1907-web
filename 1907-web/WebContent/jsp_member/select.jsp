@@ -19,7 +19,7 @@
 			<input type='text' name='findStr' value='${param.findStr }'> 
 			<input type='submit' value='검색' name='btnFind' id='btnFind'> 
 			<input type='hidden' name='mId'>
-			<input type='text' name='nowPage' value='${param.nowPage }'>
+			<input type='text' name='nowPage' id='nowPage' value='${param.nowPage }'> <!-- 테스트 후 히든테그로 바꿔야함 -->
 			</div>
 		</form>
 		<div id='title'>
@@ -44,13 +44,13 @@
 			
 		</div>
 		<div id = 'paging'>
-			<input type='button' value='이전'>
-			<input type='button' value='1'>
-			<input type='button' value='2'>
-			<input type='button' value='3'>
-			<input type='button' value='4'>
-			<input type='button' value='5'>
-			<input type='button' value='다음'>			
+			<input type='button' value='이전' onclick='goPage(1)' >
+			<input type='button' value='1' onclick='goPage(1)' >
+			<input type='button' value='2' onclick='goPage(2)' >
+			<input type='button' value='3' onclick='goPage(3)' >
+			<input type='button' value='4' onclick='goPage(4)' >
+			<input type='button' value='5' onclick='goPage(5)' >
+			<input type='button' value='다음' onclick='goPage(6)' >
 		</div>
 	</div>	
 	<script>btnFunc();</script>

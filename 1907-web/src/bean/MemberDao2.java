@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDao2 {
@@ -77,6 +78,38 @@ public class MemberDao2 {
 			return msg;
 		}
 	}
+	public List<MemberVo2> select(Page p) {
+		
+		List<MemberVo2> list = new ArrayList<MemberVo2>();		
+		String sql = null;
+		PreparedStatement ps = null;			
+		ResultSet rs = null;
+		int totList = 0;
+		try {
+			//전체건수
+			sql = "select count(mId) cnt from member "
+					+ " where mId like ? or mName like ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "%"+p.getFindStr() +"%");
+			ps.setString(2, "%"+p.getFindStr() +"%");
+			
+			rs = ps.executeQuery();
+			if(rs.next()) totList = rs.getInt("cnt");
+			p.setTotListSize(totList);
+			p.pageCompute();
+			
+			System.out.println("totSize : " + p.getTotListSize());
+			System.out.println("startPage : " + p.getStartPage());
+			System.out.println("endPage : " + p.getEndPage());
+			System.out.println("startNo : " + p.getStartNo());
+			System.out.println("endNo : " + p.getEndNo());
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {						
+			return list;
+		}
+	}
 	
 	public String modify(MemberVo vo) {
 		String msg = "자료가 수정되었습니다.";
@@ -115,39 +148,7 @@ public class MemberDao2 {
 			return msg;
 		}
 	}
-	public List<MemberVo> select(String findStr) {
-		MemberVo json = null;
-		MemberVo vo = new MemberVo();
-		String sql = " select mid, mName, to_char(rDate, 'rrrr-mm-dd') rDate, grade "
-				   + " from member "
-				   + " where mId = ? or mName like ? "
-				   + " order by mName ";
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, findStr );
-			ps.setString(2, "%" + findStr + "%");
-			
-			StringBuilder sd = new StringBuilder();
-			sd.append("[");
-			
-			ResultSet rs = ps.executeQuery();					
-			while(rs.next()) {
-				String mId   =  rs.getString("mId")      ;
-				String mName =  rs.getString("mName")    ;
-				String rDate =  rs.getString("rDate")    ;
-				String grade =  rs.getString("grade")+"" ;				
-				}		    
-			
-			rs.close();
-			ps.close();
-			conn.close();
-			
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}finally {						
-			return (List<MemberVo>) json;
-		}
-	}
+
 	public MemberVo view(String mId) {
 		System.out.println("Mid=" +mId);
 		MemberVo vo = new MemberVo();

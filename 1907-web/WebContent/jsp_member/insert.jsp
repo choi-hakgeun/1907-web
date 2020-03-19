@@ -41,7 +41,8 @@
 		<label></label>
 		<input type='button' id='btnRegister' value='등록'> 
 		<input type='button' id='btnList' value='취소'>
-		<input type='text' name='findStr' value='${param.findStr }'>
+		<input type='hidden' name='findStr' value='${param.findStr }'>
+		<input type='text' name='nowPage' value='${param.nowPage }'>
 	</form>
 	<img src='http://placehold.it/150x180' id='photo' width='150px' height='180px'/>
 </div>

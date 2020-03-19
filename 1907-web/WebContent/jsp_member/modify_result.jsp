@@ -15,8 +15,9 @@
 		
 		<h3>수정~~~</h3>
 		<form name='frm' id='frm' method='post'>
-			<input type='hidden' name='findStr' value=''> 
 			<input type='button' value='목록' id='btnList'>
+			<input type='hidden' name='findStr' value='${param.findStr }'> 
+			<input type='text' name='nowPage' value='${param.nowPage }'>
 		</form>
 		<script>btnFunc();</script>
 </body>

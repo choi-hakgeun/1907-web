@@ -55,26 +55,29 @@ public class FileUpload {
                switch(k) {
                case "mId": // input type= 'text' name='mId'인가
                   vo.setmId(v);
-               break;
+                  break;
                
                case "pwd":
                   vo.setPwd(v);
-               break;
+                  break;
                
                case "mName":
                   vo.setmName(v);
-               break;
+                  break;
                
                case "rDate":
                   vo.setrDate(v);
-               break;
+                  break;
                
                case "grade":
                   vo.setGrade(Integer.parseInt(v));
-               break;
+                  break;
                case "findStr":
             	   req.setAttribute("findStr", v);
-               break;
+            	   break;
+               case "nowPage":
+            	   req.setAttribute("nowPage", v);            	   
+            	   break;
                } // end of switch
             } else { // <input type='file'/>
                if(fi.getSize()>0) {

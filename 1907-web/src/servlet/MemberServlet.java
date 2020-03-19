@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.MemberDao2;
 import bean.MemberPhoto;
 import bean.MemberVo2;
+import bean.Page;
 @WebServlet("*.mm")
 public class MemberServlet extends HttpServlet{
 	String url = "index.jsp?inc=./jsp/index_jsp.jsp&sp=./jsp_member";
@@ -83,13 +84,38 @@ public class MemberServlet extends HttpServlet{
 			}
 			
 		}else {
+			System.out.println("error");
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
+		path += "?nowPage=" + req.getAttribute("nowPage");
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}
-
-	public void select(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+	public void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String path = url + "/modify.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher(path);
+		rd.forward(req, resp);
+		
+	}
+	public void select(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		MemberDao2 dao = new MemberDao2();
+		int nowPage = 1;
+		String findStr ="";
+		if(req.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(req.getParameter("nowPage"));
+		}
+		if(req.getParameter("findStr") != null) {
+			findStr = req.getParameter("findStr");
+		}
+		
+		Page p = new Page();
+		p.setNowPage(nowPage);
+		p.setFindStr(findStr);
+		
+		List<MemberVo2> list = dao.select(p);
+		
+		
 		String path = url + "/select.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
@@ -116,12 +142,7 @@ public class MemberServlet extends HttpServlet{
 		
 	}
 
-	public void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String path = url + "/modify.jsp";
-		RequestDispatcher rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);
-		
-	}
+
 
 
 
