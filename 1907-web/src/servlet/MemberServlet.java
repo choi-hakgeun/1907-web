@@ -69,7 +69,7 @@ public class MemberServlet extends HttpServlet{
 			
 			MemberDao2 dao = new MemberDao2();
 			String msg = dao.insert(vo);
-			req.setAttribute("msg", msg);
+			req.setAttribute("msg", msg);			
 			
 			System.out.println("mId=" + vo.getmId());
 			System.out.println("pwd=" + vo.getPwd());
@@ -102,20 +102,22 @@ public class MemberServlet extends HttpServlet{
 		MemberDao2 dao = new MemberDao2();
 		int nowPage = 1;
 		String findStr ="";
-		if(req.getParameter("nowPage") != null) {
+		if(req.getParameter("nowPage") !=null) {
 			nowPage = Integer.parseInt(req.getParameter("nowPage"));
-		}
-		if(req.getParameter("findStr") != null) {
+		}		
+		if(req.getParameter("findStr")!=null) {//hidden에 검색어 저장이 되면 낫널로 해도됨
 			findStr = req.getParameter("findStr");
 		}
 		
 		Page p = new Page();
 		p.setNowPage(nowPage);
 		p.setFindStr(findStr);
+		p.pageCompute();
 		
 		List<MemberVo2> list = dao.select(p);
 		
-		
+		req.setAttribute("list", list);		
+		req.setAttribute("p", p);
 		String path = url + "/select.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);

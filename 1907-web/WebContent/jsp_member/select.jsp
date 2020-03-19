@@ -16,10 +16,10 @@
 		<form name='frm' id='frm' method='post'>
 			<input type='button' value='추가' id='btnInsert'>
 			<div>
-			<input type='text' name='findStr' value='${param.findStr }'> 
 			<input type='submit' value='검색' name='btnFind' id='btnFind'> 
 			<input type='hidden' name='mId'>
-			<input type='text' name='nowPage' id='nowPage' value='${param.nowPage }'> <!-- 테스트 후 히든테그로 바꿔야함 -->
+			<input type='text' name='findStr' value='${param.findStr }'> <!-- 테스트 후 히든테그로 바꿔야함 -->
+			<input type='text' name='nowPage' id='nowPage' value='${empty param.nowPage? 1 : param.nowPage }'> <!-- 테스트 후 히든테그로 바꿔야함 -->
 			</div>
 		</form>
 		<div id='title'>
@@ -42,15 +42,26 @@
 				<span class='grade'>1</span>
 			</div>
 			
+			<c:forEach var="vo" items="${list }">
+			<div class='item' onclick="view('${vo.mId}')">
+				<span class='mId'>${vo.mId }</span>
+				<span class='mName'>${vo.mName }</span>
+				<span class='rDate'>${vo.rDate }</span>
+				<span class='grade'>${vo.grade }</span>
+			</div>
+			</c:forEach>
+			
 		</div>
 		<div id = 'paging'>
-			<input type='button' value='이전' onclick='goPage(1)' >
-			<input type='button' value='1' onclick='goPage(1)' >
-			<input type='button' value='2' onclick='goPage(2)' >
-			<input type='button' value='3' onclick='goPage(3)' >
-			<input type='button' value='4' onclick='goPage(4)' >
-			<input type='button' value='5' onclick='goPage(5)' >
-			<input type='button' value='다음' onclick='goPage(6)' >
+			<c:if test="${p.nowPage > p.blockSize }">
+			<input type='button' value='처음' onclick='goPage(1)' >
+			</c:if>
+			<c:forEach var='i' begin='${p.startPage }' end='${p.endPage }'>
+				<input type='button' value='${i }' onclick='goPage(${i})' >			
+			</c:forEach>			
+			<c:if test="${p.nowPage < p.totPage }">
+			<input type='button' value='다음' onclick='goPage(${p.endPage+1})' >
+			</c:if>
 		</div>
 	</div>	
 	<script>btnFunc();</script>

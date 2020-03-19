@@ -98,6 +98,34 @@ public class MemberDao2 {
 			p.setTotListSize(totList);
 			p.pageCompute();
 			
+			sql = " select * from( "
+				+ " 	select rownum rn , A.* from ("
+				+ " 		select mId, pwd, mName, to_char(rDate, 'rrrr-MM-dd') rDate, grade "
+				+ "			from member "
+				+ "			where mId like ? or mName like ? "
+				+ "			order by mName)A "
+				+ " )where rn between ? and ? ";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "%" + p.getFindStr() + "%");
+			ps.setString(2, "%" + p.getFindStr() + "%");
+			ps.setInt(3, p.getStartNo());
+			ps.setInt(4, p.getEndNo());
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				MemberVo2 vo = new MemberVo2();				
+				vo.setmId(rs.getString("mid"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setmName(rs.getString("mName"));
+				vo.setrDate(rs.getString("rDate"));
+				vo.setGrade(rs.getInt("grade"));
+				
+				list.add(vo);
+						
+			}
+					
+			System.out.println(p.getFindStr());
 			System.out.println("totSize : " + p.getTotListSize());
 			System.out.println("startPage : " + p.getStartPage());
 			System.out.println("endPage : " + p.getEndPage());

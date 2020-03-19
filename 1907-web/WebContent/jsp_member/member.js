@@ -70,8 +70,7 @@ let view = function(mId){
 	frm.method = 'post';
 	$('#frm').attr('action', 'view.mm').submit();
 }
-let goPage = function(nowPage){
-	alert(nowPage);
+let goPage = function(nowPage){	
 	$('#nowPage').val(nowPage);
 	$('#frm').attr('action', 'select.mm').submit();
 }
