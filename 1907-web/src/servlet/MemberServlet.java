@@ -52,7 +52,7 @@ public class MemberServlet extends HttpServlet{
 		}		
 	}
 	public void insert(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String findStr = req.getParameter("findStr");		
+		String findStr = req.getParameter("findStr");
 		
 		String path = url + "/insert.jsp?findStr="+findStr;
 		RequestDispatcher rd = req.getRequestDispatcher(path);

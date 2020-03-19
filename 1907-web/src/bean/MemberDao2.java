@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,13 +10,21 @@ import java.util.List;
 
 public class MemberDao2 {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	Connection conn;	
+	Connection conn;
+	
+	String upload = "C:\\Users\\choi\\git\\1907-web\\1907-web\\WebContent\\upload\\"; // 파일을 저장할 경로
 	
 	public MemberDao2() {
 		conn = DBConn.getConn("hr", "hr");
 	}	
 	public String insert(MemberVo2 vo) {
 		String msg = "회원정보가 정상적으로 저장되었습니다.";
+		MemberPhoto p =null;
+		
+		List<MemberPhoto> list = vo.getPhotos();
+		if(list.size()>0) {
+			p = list.get(0);
+		}		
 		
 		try {
 			String sql = "insert into member(mId, pwd, mName, rDate, grade)"
@@ -31,27 +40,34 @@ public class MemberDao2 {
 			
 			int cnt = ps.executeUpdate();
 			
-			if(cnt>0) {
-				List<MemberPhoto> list = vo.getPhotos();
-				MemberPhoto p = list.get(0);
-				if(p.oriFile != null) {
-					sql = "insert into member_photo(serial, oriFile, sysFile)"
-							+ "	values(seq_member_photo.nextval, ? , ? )";
+			if(cnt>0) {					
+				if(p != null) {
+					sql = "insert into member_photo(serial, oriFile, sysFile, mid, rDate) "
+							+ "	values(seq_member_photo.nextval, ? , ? , ? , ? )";
+					
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, p.getOriFile());
 					ps.setString(2, p.getSysFile());
+					ps.setString(3, vo.getmId());
+					ps.setString(4, vo.getrDate());
 					cnt = ps.executeUpdate();
+						
 					if(cnt>0) {
 						conn.commit();
 					}else {
-						conn.rollback();
-					}
-				}
-			}
+						conn.rollback();//입력값이 없을시 롤백
+					}//else end						
+				}//if p.ori end
+			}//if cnt end 
 			
 		}catch(Exception ex){
+			msg = ex.toString();			
+			//에러가 발생했을때 파일이 업로드 된 파일삭제.
+			File delFile = new File(upload + p.getSysFile());
+			if(delFile.exists()) {
+				delFile.delete();		
+			}			
 			conn.rollback();
-			msg = ex.toString();
 		}finally {
 			try {
 				conn.commit();

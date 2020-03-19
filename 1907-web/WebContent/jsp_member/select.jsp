@@ -19,6 +19,7 @@
 			<input type='text' name='findStr' value='${param.findStr }'> 
 			<input type='submit' value='검색' name='btnFind' id='btnFind'> 
 			<input type='hidden' name='mId'>
+			<input type='text' name='nowPage' value='${param.nowPage }'>
 			</div>
 		</form>
 		<div id='title'>
@@ -42,7 +43,16 @@
 			</div>
 			
 		</div>
-	</div>
+		<div id = 'paging'>
+			<input type='button' value='이전'>
+			<input type='button' value='1'>
+			<input type='button' value='2'>
+			<input type='button' value='3'>
+			<input type='button' value='4'>
+			<input type='button' value='5'>
+			<input type='button' value='다음'>			
+		</div>
+	</div>	
 	<script>btnFunc();</script>
 </body>
 </html>
