@@ -9,7 +9,9 @@ public class MemberVo2 {
 	String mName;
 	String rDate;
 	int    grade;
-	List<MemberPhoto> photos = new ArrayList<MemberPhoto>();;
+	String oriFile;
+	String sysFile;
+	List<MemberPhoto> photos = new ArrayList<MemberPhoto>();
 	
 	public String getPwd() {
 		return pwd;
@@ -47,5 +49,18 @@ public class MemberVo2 {
 	public void setPhotos(List<MemberPhoto> photos) {
 		this.photos = photos;
 	}
+	public String getOriFile() {
+		return oriFile;
+	}
+	public void setOriFile(String oriFile) {
+		this.oriFile = oriFile;
+	}
+	public String getSysFile() {
+		return sysFile;
+	}
+	public void setSysFile(String sysFile) {
+		this.sysFile = sysFile;
+	}
+	
 
 }

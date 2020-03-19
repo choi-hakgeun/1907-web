@@ -139,9 +139,10 @@ public class MemberDao2 {
 		}
 	}
 	
-	public String modify(MemberVo vo) {
+	public String modify(MemberVo2 vo) {
 		String msg = "자료가 수정되었습니다.";
-		String sql = "update member set mName=?, rDate=?, grade=? where mId=?";
+		String sql = "update member set mName=?, rDate=?, grade=? where mId=?";		
+		
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getmName());
@@ -177,23 +178,45 @@ public class MemberDao2 {
 		}
 	}
 
-	public MemberVo view(String mId) {
+	public MemberVo2 view(String mId) {
 		System.out.println("Mid=" +mId);
-		MemberVo vo = new MemberVo();
+		MemberVo2 vo = new MemberVo2();
+		MemberPhoto p = new MemberPhoto();
+		List<MemberPhoto> list = new ArrayList<MemberPhoto>();
 		try {
-			String sql = "select * from member where mId=?";
+			String sql = " select m.mid, m.mName, to_char(m.rDate, 'rrrr-MM-dd') rDate, m.grade, p.orifile, p.sysfile  "
+					   + " from member m left outer join member_photo p on p.mId=m.mId "
+					   + " where m.mId= ? ";
+			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, mId);
 			
 			ResultSet rs = ps.executeQuery();
+			System.out.println(rs);
 			if(rs.next()) {
+				System.out.println("1");
+				System.out.println(rs.getString("mId"));
 				vo.setmId(rs.getString("mId"));
 				vo.setmName(rs.getString("mName"));
-				vo.setrDate(rs.getDate("rDate"));
+				vo.setrDate(rs.getString("rDate"));
 				vo.setGrade(rs.getInt("grade"));
+				vo.setOriFile(rs.getString("oriFile"));
+				vo.setSysFile(rs.getString("sysFile"));
+				
+				list.add(p);
+				vo.setPhotos(list);
+				System.out.println(list);
 			}
-		}catch(Exception ex) {
+			sql = " select sysfile form member_photo join member on member_photo.mId=?";
+			ps.setString(1, mId);
 			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				vo.setSysFile(rs.getString("sysFile"));
+			}
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
 		}finally {
 			return vo;
 		}		

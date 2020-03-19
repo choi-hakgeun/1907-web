@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.FileUpload;
 import bean.MemberDao2;
 import bean.MemberPhoto;
 import bean.MemberVo2;
@@ -91,12 +92,6 @@ public class MemberServlet extends HttpServlet{
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}
-	public void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String path = url + "/modify.jsp";
-		RequestDispatcher rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);
-		
-	}
 	public void select(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		MemberDao2 dao = new MemberDao2();
@@ -123,20 +118,53 @@ public class MemberServlet extends HttpServlet{
 		rd.forward(req, resp);
 	}
 
-	public void deleteR(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String path = url + "/delete_result.jsp";
-		RequestDispatcher rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);
-		
-	}
-
 	public void view(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		MemberDao2 dao = new MemberDao2();
+		MemberPhoto p = new MemberPhoto();
+		FileUpload f = new FileUpload(req, resp);
+		
+		String mId = "";
+		
+		if(req.getParameter("mId") != null) {
+			mId = req.getParameter("mId");
+		}
+		
+		MemberVo2 vo = dao.view(mId);
+		
+		req.setAttribute("vo", vo);
+		
 		String path = url + "/view.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 		
 	}
-
+	public void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		MemberDao2 dao = new MemberDao2();
+		MemberPhoto p = new MemberPhoto();
+		FileUpload f = new FileUpload(req, resp);
+		
+		String mId = "";
+		
+		if(req.getParameter("mId") != null) {
+			mId = req.getParameter("mId");
+		}
+		
+		MemberVo2 vo = dao.view(mId);
+		
+		req.setAttribute("vo", vo);
+		
+		String path = url + "/modify.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher(path);
+		rd.forward(req, resp);
+		
+	}
+	
+	public void deleteR(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String path = url + "/delete_result.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher(path);
+		rd.forward(req, resp);		
+	}
+	
 	public void modifyR(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = url + "/modify_result.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(path);

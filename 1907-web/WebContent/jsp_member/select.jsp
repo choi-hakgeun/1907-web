@@ -17,7 +17,7 @@
 			<input type='button' value='추가' id='btnInsert'>
 			<div>
 			<input type='submit' value='검색' name='btnFind' id='btnFind'> 
-			<input type='hidden' name='mId'>
+			<input type='hidden' name='mId' 'value='${param.mId }'>
 			<input type='text' name='findStr' value='${param.findStr }'> <!-- 테스트 후 히든테그로 바꿔야함 -->
 			<input type='text' name='nowPage' id='nowPage' value='${empty param.nowPage? 1 : param.nowPage }'> <!-- 테스트 후 히든테그로 바꿔야함 -->
 			</div>

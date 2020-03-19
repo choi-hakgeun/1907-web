@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,21 +11,23 @@
 <script src='./jsp_member/member.js'></script></head>
 <body>
 	<div id='member_main'>
-		<h3>회원수정</h3>
-		<form name='frm' method='post' id='frm'>
+		<h3>회원수정</h3>		
+		<form name='frm' method='post' id='frm' enctype="multipart/form-data">
+		<input type='hidden' name='mId' 'value='${param.mId }'>
 			<label>아이디</label>
-			<input type='text' name='mId'value='aaa' />
+			<input type='text' name='mId' value='${vo.mId }' />
 			<br />
 			<label>비밀번호</label>
-			<input type='password' name='pwd'>
+			<input type='password' name='pwd' value='${vo.pwd }'>
 			<br />
 			<label>회원명</label>
-			<input	type='text' name='mName' value='bbb' />
+			<input	type='text' name='mName' value='${vo.mName }' />
 			<br />
 			<label>등록일</label>
-			<input type='date' name='rDate' value='ccc' />
+			<input type='date' name='rDate' value='${vo.rDate }' />
 			<br />
-			<label>학년</label> <select name='grade'>
+			<label>학년</label> 
+			<select name='grade' value='${vo.grade }'>
 				<option value='1'>1 학년</option>
 				<option value='2'>2 학년</option>
 				<option value='3'>3 학년</option>
@@ -35,7 +38,8 @@
 				<option value='8'>8 학년</option>
 				<option value='9'>9 학년</option>
 				<option value='10'>10 학년</option>
-			</select> <br /> 
+			</select>
+			<br /> 
 			<label>증명사진</label>
 			<input type='file' name='photo' id='btnPhoto'/><br/>
 			<label></label>
@@ -48,7 +52,8 @@
 	</div>
 <script>
 btnFunc();
-frm.grade.selectedIndex = 0;
+frm.grade.selectedIndex = Number(${vo.grade})-1;
+$('#frm').attr('enctype', null);
 </script>
 </body>
 </html>
