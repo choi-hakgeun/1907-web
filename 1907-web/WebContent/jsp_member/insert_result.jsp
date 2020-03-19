@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id='member_main'>
-	${msg }		
+	${msg }
 
 	<form name='frm' id='frm' method='post'>
 		<input type='button' value='목록' id='btnList'>

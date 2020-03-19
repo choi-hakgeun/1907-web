@@ -141,6 +141,13 @@ public class MemberDao2 {
 	
 	public String modify(MemberVo2 vo) {
 		String msg = "자료가 수정되었습니다.";
+		MemberPhoto p = null;
+		
+		List<MemberPhoto> list = vo.getPhotos();
+		if(list.size()>0) {
+			p = list.get(0);
+		}
+		
 		String sql = "update member set mName=?, rDate=?, grade=? where mId=?";		
 		
 		try {
@@ -179,7 +186,7 @@ public class MemberDao2 {
 	}
 
 	public MemberVo2 view(String mId) {
-		System.out.println("Mid=" +mId);
+		System.out.println("view mId=" +mId);
 		MemberVo2 vo = new MemberVo2();
 		MemberPhoto p = new MemberPhoto();
 		List<MemberPhoto> list = new ArrayList<MemberPhoto>();
@@ -192,10 +199,9 @@ public class MemberDao2 {
 			ps.setString(1, mId);
 			
 			ResultSet rs = ps.executeQuery();
-			System.out.println(rs);
-			if(rs.next()) {
-				System.out.println("1");
-				System.out.println(rs.getString("mId"));
+			System.out.println("view rs" + rs);
+			if(rs.next()) {				
+				System.out.println("view if" + rs.getString("mId"));
 				vo.setmId(rs.getString("mId"));
 				vo.setmName(rs.getString("mName"));
 				vo.setrDate(rs.getString("rDate"));
@@ -205,7 +211,7 @@ public class MemberDao2 {
 				
 				list.add(p);
 				vo.setPhotos(list);
-				System.out.println(list);
+				System.out.println("view photolist" + list);
 			}
 			sql = " select sysfile form member_photo join member on member_photo.mId=?";
 			ps.setString(1, mId);

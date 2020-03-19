@@ -150,7 +150,7 @@ public class MemberServlet extends HttpServlet{
 		}
 		
 		MemberVo2 vo = dao.view(mId);
-		
+		System.out.println("modify : " + vo);
 		req.setAttribute("vo", vo);
 		
 		String path = url + "/modify.jsp";
