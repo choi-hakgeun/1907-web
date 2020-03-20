@@ -142,7 +142,7 @@ public class MemberDao2 {
 		File file = new File(upload + fileName);
 		if(file.exists()) file.delete();
 	}
-	public String deleletP(String s) {
+	public String deleletP(String s, String mId) {
 		String sql = null;
 		PreparedStatement ps = null;			
 		ResultSet rs = null;
