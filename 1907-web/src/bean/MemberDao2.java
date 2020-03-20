@@ -138,7 +138,42 @@ public class MemberDao2 {
 			return list;
 		}
 	}
-	
+	public void delFile(String fileName) {
+		File file = new File(upload + fileName);
+		if(file.exists()) file.delete();
+	}
+	public String deleletP(String s) {
+		String sql = null;
+		PreparedStatement ps = null;			
+		ResultSet rs = null;
+		String sysFile = null;
+		
+		try {
+			sql = " select sysfile from member_photo where mId=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, s);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				sysFile = rs.getString("sysFile");				
+			}
+			conn.setAutoCommit(false);
+			sql = " delete from member_photo where mId=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mId);
+			int r = ps.executeUpdate();
+			if(r>0){
+				delFile(sysFile);				
+			}
+			conn.commit();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		
+		
+		return s;
+	}
 	public String modify(MemberVo2 vo) {
 		String msg = "데이터가 정상적으로 수정 되었습니다.";
 		MemberPhoto mp = null;
@@ -148,36 +183,107 @@ public class MemberDao2 {
 		if(list.size()>0) {
 			mp = list.get(0);
 		}
+		String sql = null;
+		PreparedStatement ps = null;			
+		ResultSet rs = null;		
+				
 		
-		String sql = "update member set mName=?, rDate=?, grade=? where mId=?";		
-		
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+		try {			
+			conn.setAutoCommit(false);
+			//수정전 파일명(삭제될 파일)
+			System.out.println("conn : "+ conn);
+			if(mp != null) {
+				sql = " select serial, sysFile from member_photo "
+					+ " where mId=?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, vo.getmId());
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					deleteFile = rs.getString("sysFile");
+					serial = rs.getInt("serial");
+				}
+			}
+			
+			//기본정보 수정
+			sql = " update member set mName=?, rDate=?, grade=?"
+				+ " where mId=?";
+			ps = conn.prepareStatement(sql);			
 			ps.setString(1, vo.getmName());
 			ps.setString(2, vo.getrDate());
 			ps.setInt(3, vo.getGrade());
-			ps.setString(4, vo.getmId());
-			
-			int r = ps.executeUpdate();
-			if(r<1) {
-				throw new Exception();
-			}
-		}catch(Exception e) {
-			msg = e.toString();			
-		}finally {
-			return msg;
-		}
-	}
-	public String delete(String mid) {
-		String msg = "자료가 삭제되었습니다.";
-		String sql = "delete from member where mId=?";
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, mid);
+			ps.setString(4, vo.getmId());			
 			
 			int cnt = ps.executeUpdate();
 			if(cnt<1) {
-				throw new Exception("자료 삭제중 예외 발생...");				
+				throw new Exception("기본정보 수정중 오류발생");
+				
+			}
+			//기존 사진 정보에 따른 분기
+			if(mp != null) {
+				if(deleteFile == null) { //이미지를 등록하지 않고 나중에 등록하는 경우
+					sql = " insert into member_photo(serial, mId, rDate, oriFile, sysFile) "
+						+ " values(seq_member_photo.nextval, ?, ?, ?, ?) ";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, vo.getmId());
+					ps.setString(2, vo.getrDate());
+					ps.setString(3, mp.getOriFile());
+					ps.setString(4, mp.getSysFile());
+					
+					cnt = ps.executeUpdate();
+					if(cnt<1) {
+						throw new Exception("첨부파일 추가시 오류 발생");
+					}
+				}else { // 등록된 이미지를 수정하는 경우
+					sql = " update member_photo set rDate=?, oriFile=?, sysFile=? "
+						+ " where serial=? ";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, vo.getrDate());
+					ps.setString(2, mp.getOriFile());
+					ps.setString(3, mp.getSysFile());					
+					ps.setInt(4, serial);					
+					cnt = ps.executeUpdate();
+					if(cnt<1) {
+						throw new Exception("첨부파일 수정시 오류 발생");
+					}
+				}				
+			}			
+			conn.commit();
+		}catch(Exception ex) {
+			conn.rollback();			
+			msg = ex.getMessage();
+		}finally {
+			if(deleteFile != null) {
+				delFile(deleteFile);				
+			}
+			return msg;
+		}
+	}
+
+	
+	public String delete(String mid, String pwd) {
+		MemberVo2 vo = new MemberVo2();
+		String msg = "자료가 삭제되었습니다.";
+		MemberPhoto mp = null;
+		String deleteFile = null; //이미지를 수정한 경우 이전파일 삭제
+		int serial =0;
+		List<MemberPhoto> list = vo.getPhotos();
+		if(list.size()>0) {
+			mp = list.get(0);
+		}
+		String sql = null;
+		PreparedStatement ps = null;			
+		ResultSet rs = null;
+		
+		sql = "delete from member where mId=? and pwd = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mid);
+			ps.setString(2, pwd);
+			
+			int cnt = ps.executeUpdate();
+			if(cnt<1) {
+				msg="아이디 혹은 패스워드가 잘못되었습니다.";		
 			}
 		}catch(Exception ex) {
 			msg = ex.getMessage();

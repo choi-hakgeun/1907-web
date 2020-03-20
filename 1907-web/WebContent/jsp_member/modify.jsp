@@ -39,7 +39,8 @@
 			<label>증명사진</label>
 			<input type='file' name='photo' id='btnPhoto'/><br/>			
 			<input type='button' id='btnUpdate' value='저장' /> 
-			<input type='button' id='btnList' value='목록' /> 
+			<input type='button' id='btnList' value='목록' />
+			<input type='button' id='btnDeleteP' value='사진삭제' />
 			
 			<input type='hidden' name='pwd' >
 			<input type='hidden' name='findStr' value='${param.findStr }' >

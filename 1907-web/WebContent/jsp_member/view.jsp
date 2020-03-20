@@ -40,9 +40,12 @@
 			<label></label>
 			<input type='button' id='btnModify' value='수정' /> 
 			<input type='button' id='btnDelete' value='삭제' />
-			<input type='button' id='btnList' value='목록' /> 
+			<input type='button' id='btnDeleteP' value='사진삭제' />
+			<input type='button' id='btnList' value='목록' />
+			
 			<input type='hidden' name='findStr'	value='${param.findStr }' />
-			<input type='hidden' name='nowPage' value='${param.nowPage }'>			
+			<input type='hidden' name='nowPage' value='${param.nowPage }'>		
+			<input type="password" name="pwd" id="pwd" />	
 		</form>
 		
 	<c:choose>

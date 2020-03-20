@@ -12,12 +12,12 @@
 </head>
 <body>
 <div id='member_main'>
-	${msg }		
+	${msg }
 
-	<form name='frm' id='frm' method='post'>
-		<input type='button' value='목록' id='btnList'>
+	<form name='frm' id='frm' method='post' >
+		<input type='button' value='목록' id='btnList'>		
 		<input type='hidden' name='findStr' value='${param.findStr }' >
-		<input type='text' name='nowPage' value='${param.nowPage }'>
+		<input type='hidden' name='nowPage' value='${param.nowPage }'>
 	</form>
 </div>
 <script>btnFunc()</script>

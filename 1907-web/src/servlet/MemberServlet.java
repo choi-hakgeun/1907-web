@@ -163,7 +163,15 @@ public class MemberServlet extends HttpServlet{
 	}
 	
 	public void deleteR(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String path = url + "/delete_result.jsp";
+		String path = url + "/delete_result.jsp";	
+		
+		MemberDao2 dao = new MemberDao2();		
+		String mId = req.getParameter("mId");
+		String pwd = req.getParameter("pwd");
+		String msg = dao.delete(mId, pwd);
+		
+		req.setAttribute("msg", msg);
+		
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}

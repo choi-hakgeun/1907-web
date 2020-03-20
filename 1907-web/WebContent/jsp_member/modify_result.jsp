@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,11 +14,11 @@
 <body>
 	<div id='member_main'>
 		
-		<h3>수정~~~</h3>
+		<h3>${msg }</h3>
 		<form name='frm' id='frm' method='post'>
 			<input type='button' value='목록' id='btnList'>
-			<input type='hidden' name='findStr' value='${param.findStr }'> 
-			<input type='text' name='nowPage' value='${param.nowPage }'>
+			<input type='text' name='findStr' value='${findStr }'> 
+			<input type='text' name='nowPage' value='${nowPage }'>
 		</form>
 		<script>btnFunc();</script>
 </body>

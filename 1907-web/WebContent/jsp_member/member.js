@@ -26,6 +26,24 @@ let btnFunc = function(){
 	}
 	if( $('#btnDelete')!=null){
 		$('#btnDelete').click(function(){
+			var pwd = prompt("비밀번호를 입력하세요.");			
+			if(pwd != null){
+				$('#pwd').val(pwd);			
+				$('#frm').attr('action', 'deleteR.mm').submit();				
+			}
+
+
+
+		});
+	}
+	if( $('#btnDeleteP')!=null){
+		$('#btnDeleteP').click(function(){
+			var pwd = prompt("비밀번호를 입력하세요.", "password");
+			console.log(pwd);
+			if(pwd != null){
+				$('#pwd').val(pwd);
+				$('#frm').removeAttr('enctype');
+			}
 			let yn = confirm("정말???");
 			if(yn){
 				$('#frm').attr('action', 'deleteR.mm').submit();				
