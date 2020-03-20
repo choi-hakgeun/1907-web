@@ -32,7 +32,6 @@ let btnFunc = function(){
 			}
 		});
 	}
-	
 	if( $('#btnModify')!=null){
 		$('#btnModify').click(function(){
 			$('#frm').attr('action', 'modify.mm').submit();
@@ -64,9 +63,8 @@ let insert = function(){
 	btnFunc();
 	frm.rDate.valueAsDate = new Date();
 }
-
 let view = function(mId){
-	frm.mId.value = mId;
+	frm.mId.value = mId; //폼테그에 mId라는 값을 넣음
 	frm.method = 'post';
 	$('#frm').attr('action', 'view.mm').submit();
 }

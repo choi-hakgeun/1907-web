@@ -119,41 +119,44 @@ public class MemberServlet extends HttpServlet{
 	}
 
 	public void view(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		MemberDao2 dao = new MemberDao2();
-		MemberPhoto p = new MemberPhoto();
-		FileUpload f = new FileUpload(req, resp);
-		
-		String mId = "";
-		
-		if(req.getParameter("mId") != null) {
-			mId = req.getParameter("mId");
-		}
-		
+		String path = url + "/view.jsp";
+
+		MemberDao2 dao = new MemberDao2();		
+		String mId = req.getParameter("mId");				
 		MemberVo2 vo = dao.view(mId);
 		
 		req.setAttribute("vo", vo);
 		
-		String path = url + "/view.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 		
 	}
 	public void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		MemberDao2 dao = new MemberDao2();
-		MemberPhoto p = new MemberPhoto();
-		FileUpload f = new FileUpload(req, resp);
+		String path = url + "/modify.jsp";
 		
-		String mId = "";
-		
-		if(req.getParameter("mId") != null) {
-			mId = req.getParameter("mId");
-		}
-		
+		MemberDao2 dao = new MemberDao2();		
+		String mId = req.getParameter("mId");		
 		MemberVo2 vo = dao.view(mId);
-		System.out.println("modify : " + vo);
+		
 		req.setAttribute("vo", vo);
 		
-		String path = url + "/modify.jsp";
+		RequestDispatcher rd = req.getRequestDispatcher(path);
+		rd.forward(req, resp);
+		
+	}
+	public void modifyR(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String path = url + "/modify_result.jsp";
+		String msg = "데이터가 정상적으로 수정되었습니다.";
+		
+		FileUpload upload = new FileUpload(req, resp);
+		if(upload.uploadFormCheck()) {
+			MemberVo2 vo = upload.uploading();
+			MemberDao2 dao = new MemberDao2();
+			msg = dao.modify(vo);			
+		}
+		
+		req.setAttribute("msg", msg);
+		
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 		
@@ -162,15 +165,9 @@ public class MemberServlet extends HttpServlet{
 	public void deleteR(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = url + "/delete_result.jsp";
 		RequestDispatcher rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);		
+		rd.forward(req, resp);
 	}
 	
-	public void modifyR(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String path = url + "/modify_result.jsp";
-		RequestDispatcher rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);
-		
-	}
 
 
 

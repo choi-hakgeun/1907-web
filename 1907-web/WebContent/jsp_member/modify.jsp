@@ -12,13 +12,9 @@
 <body>
 	<div id='member_main'>
 		<h3>회원수정</h3>		
-		<form name='frm' method='post' id='frm' enctype="multipart/form-data">
-		<input type='hidden' name='mId' 'value='${param.mId }'>
+		<form name='frm' method='post' id='frm' enctype="multipart/form-data">		
 			<label>아이디</label>
 			<input type='text' name='mId' value='${vo.mId }' />
-			<br />
-			<label>비밀번호</label>
-			<input type='password' name='pwd' value='${vo.pwd }'>
 			<br />
 			<label>회원명</label>
 			<input	type='text' name='mName' value='${vo.mName }' />
@@ -41,19 +37,29 @@
 			</select>
 			<br /> 
 			<label>증명사진</label>
-			<input type='file' name='photo' id='btnPhoto'/><br/>
-			<label></label>
+			<input type='file' name='photo' id='btnPhoto'/><br/>			
 			<input type='button' id='btnUpdate' value='저장' /> 
 			<input type='button' id='btnList' value='목록' /> 
-			<input type='hidden' name='findStr' value='${param.findStr }' />
-			<input type='text' name='nowPage' value='${param.nowPage }'>
+			
+			<input type='hidden' name='pwd' >
+			<input type='hidden' name='findStr' value='${param.findStr }' >
+			<input type='hidden' name='nowPage' value='${param.nowPage }' >
 		</form>
-		<img src='http://placehold.it/150x180' id='photo' width='150px' height='180px'/>
+		<c:choose>
+		<c:when test="${empty vo.photos }"> <!-- 포토라고 하는 컬렉션에 사진이 없다면 -->
+			<img src='http://placehold.it/150x180' id='photo' width='150px' height='180px'/>
+		</c:when>
+		<c:otherwise> <!-- 기타의 경우 실행 -->
+			<c:forEach var='item' items='${vo.photos }'>
+			<img src='./upload/${item.sysFile }' id='photo' width='150px' height='180px'/> <!-- 시리얼번호가 바뀌어 저장된 파일sysFile -->
+			<!-- 다운로드시 오리파일로 받아야함 엥커테그에 파일명을 바꿔서 받을수있는 테그가 있음 -->
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
 	</div>
 <script>
 btnFunc();
-frm.grade.selectedIndex = Number(${vo.grade})-1;
-$('#frm').attr('enctype', null);
+frm.grade.selectedIndex = '${vo.grade}'-1;
 </script>
 </body>
 </html>

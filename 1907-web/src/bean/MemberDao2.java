@@ -140,12 +140,13 @@ public class MemberDao2 {
 	}
 	
 	public String modify(MemberVo2 vo) {
-		String msg = "자료가 수정되었습니다.";
-		MemberPhoto p = null;
-		
+		String msg = "데이터가 정상적으로 수정 되었습니다.";
+		MemberPhoto mp = null;
+		String deleteFile = null; //이미지를 수정한 경우 이전파일 삭제
+		int serial =0;
 		List<MemberPhoto> list = vo.getPhotos();
 		if(list.size()>0) {
-			p = list.get(0);
+			mp = list.get(0);
 		}
 		
 		String sql = "update member set mName=?, rDate=?, grade=? where mId=?";		
@@ -153,7 +154,7 @@ public class MemberDao2 {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getmName());
-			ps.setString(2, sdf.format(vo.getrDate()));
+			ps.setString(2, vo.getrDate());
 			ps.setInt(3, vo.getGrade());
 			ps.setString(4, vo.getmId());
 			
@@ -188,38 +189,44 @@ public class MemberDao2 {
 	public MemberVo2 view(String mId) {
 		System.out.println("view mId=" +mId);
 		MemberVo2 vo = new MemberVo2();
-		MemberPhoto p = new MemberPhoto();
-		List<MemberPhoto> list = new ArrayList<MemberPhoto>();
+		String sql = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;		
+		
 		try {
-			String sql = " select m.mid, m.mName, to_char(m.rDate, 'rrrr-MM-dd') rDate, m.grade, p.orifile, p.sysfile  "
-					   + " from member m left outer join member_photo p on p.mId=m.mId "
-					   + " where m.mId= ? ";
+			sql = " select mid, mName, to_char(rDate, 'rrrr-MM-dd') rDate, grade  "
+				+ " from member"
+				+ " where mId=?";
 			
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, mId);
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mId);			
+			rs = ps.executeQuery();
 			
-			ResultSet rs = ps.executeQuery();
 			System.out.println("view rs" + rs);
 			if(rs.next()) {				
 				System.out.println("view if" + rs.getString("mId"));
 				vo.setmId(rs.getString("mId"));
 				vo.setmName(rs.getString("mName"));
 				vo.setrDate(rs.getString("rDate"));
-				vo.setGrade(rs.getInt("grade"));
-				vo.setOriFile(rs.getString("oriFile"));
-				vo.setSysFile(rs.getString("sysFile"));
-				
-				list.add(p);
-				vo.setPhotos(list);
-				System.out.println("view photolist" + list);
+				vo.setGrade(rs.getInt("grade"));				
 			}
-			sql = " select sysfile form member_photo join member on member_photo.mId=?";
+			sql = " select serial, sysFile, oriFile"
+				+ " from member_photo"
+				+ " where mId=?";
+			ps = conn.prepareStatement(sql);
 			ps.setString(1, mId);
-			
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				vo.setSysFile(rs.getString("sysFile"));
-			}
+			List<MemberPhoto> list = new ArrayList<MemberPhoto>();
+			
+			if(rs.next()) {
+				MemberPhoto mp = new MemberPhoto();
+				mp.setSerial(rs.getInt("serial"));
+				mp.setOriFile(rs.getString("oriFile"));
+				mp.setSysFile(rs.getString("sysFile"));
+				list.add(mp);
+				
+			}			
+			vo.setPhotos(list);
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();

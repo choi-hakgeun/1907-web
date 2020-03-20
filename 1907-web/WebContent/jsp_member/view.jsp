@@ -14,11 +14,11 @@
 		<h3>회원상세보기</h3>
 		
 		<form name='frm' id='frm' method='post' >
-		<input type='hidden' name='mId' 'value='${param.mId }'>
+		<input type='hidden' name='mId3' 'value='${param.mId }'> <!-- 리스트를 받아오는데 name이 같으면 다른값이 들어가서 vo.mId에 리스트가 들어가서 보여지지않음. -->
 			<label>아이디</label>
-			<input type='text' name='mId' value='${vo.mId }' /> <br /> 
+			<input type='text' name='mId' value='${vo.mId }' /> <br /> <!-- 서블릿에서 req.setAttribute("vo", vo); 라는 코드를 작성해야 넘겨받겠구나 라고 생각해야함 -->
 			<label>회원명</label>
-			<input type='text' name='mName' value='${vo.mName }' /> <br /> 
+			<input type='text' name='mName' value='${vo.mName }' /> <br />
 			<label>등록일</label>
 			<input type='date' name='rDate' value='${vo.rDate }' /> <br />
 			<label>학년</label> 
@@ -42,16 +42,29 @@
 			<input type='button' id='btnDelete' value='삭제' />
 			<input type='button' id='btnList' value='목록' /> 
 			<input type='hidden' name='findStr'	value='${param.findStr }' />
-			<input type='text' name='nowPage' value='${param.nowPage }'>			
+			<input type='hidden' name='nowPage' value='${param.nowPage }'>			
 		</form>
-	<img src='http://placehold.it/150x180' id='photo' width='150px' height='180px'/>
+		
+	<c:choose>
+		<c:when test="${empty vo.photos }"> <!-- 포토라고 하는 컬렉션에 사진이 없다면 -->
+			<img src='http://placehold.it/150x180' id='photo' width='150px' height='180px'/>
+		</c:when>
+		<c:otherwise> <!-- 기타의 경우 실행 -->
+			<c:forEach var='item' items='${vo.photos }'>
+			<img src='./upload/${item.sysFile }' id='photo' width='150px' height='180px'/> <!-- 시리얼번호가 바뀌어 저장된 파일sysFile -->
+			<!-- 다운로드시 오리파일로 받아야함 엥커테그에 파일명을 바꿔서 받을수있는 테그가 있음 -->
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
 	</div>
 <script>
 btnFunc();
+frm.grade.selectedIndex = '${vo.grade}'-1;//강사님코드
+
+/* frm.grade.selectedIndex = Number(${vo.grade})-1;
 
 var upload = "./upload/${vo.sysFile }" ;
-$('#photo').attr('src', upload);
-frm.grade.selectedIndex = Number(${vo.grade})-1;
+$('#photo').attr('src', upload); */
 </script>
 </body>
 </body>

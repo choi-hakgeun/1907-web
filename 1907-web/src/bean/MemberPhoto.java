@@ -1,14 +1,23 @@
 package bean;
 
-public class MemberPhoto {	
+public class MemberPhoto {
+	int	   serial;
 	String oriFile;
 	String sysFile;
 	
 	public MemberPhoto() {}
-	public MemberPhoto(String ori, String sys) {	
+	public MemberPhoto(int ser, String ori, String sys) {
+		this.serial = ser;
 		this.oriFile = ori;
 		this.sysFile = sys;
-	}	
+	}
+	
+	public int getSerial() {
+		return serial;
+	}
+	public void setSerial(int serial) {
+		this.serial = serial;
+	}
 	public String getOriFile() {
 		return oriFile;
 	}
