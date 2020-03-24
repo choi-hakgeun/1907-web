@@ -57,7 +57,7 @@
 			<input type='button' value='처음' onclick='goPage(${p.startPage-1})' >
 			</c:if>
 			<c:forEach var='i' begin='${p.startPage }' end='${p.endPage }'>
-				<input type='button' value=${i }' ${(i==p.nowPage)? "class='here'":""} onclick='goPage(${i})' >
+				<input type='button' value='${i }' ${(i==p.nowPage)? "class='here'":""} onclick='goPage(${i})' >
 					
 			</c:forEach>			
 			<c:if test="${p.nowPage < p.totPage }">
