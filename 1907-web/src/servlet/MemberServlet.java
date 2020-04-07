@@ -152,7 +152,7 @@ public class MemberServlet extends HttpServlet{
 		if(upload.uploadFormCheck()) {
 			MemberVo2 vo = upload.uploading();
 			MemberDao2 dao = new MemberDao2();
-			msg = dao.modify(vo);			
+			msg = dao.modify(vo);
 		}
 		
 		req.setAttribute("msg", msg);
