@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,7 @@
   	  <input type='button' value='검색' id='btnFind' />
   	  
   	  <input type='hidden' name='nowPage' value='${param.nowPage }' />
-  	  <input type='hidden' name='serial' value='100' />
+  	  <input type='text' name='serial' value='100' />
   	</div>
   </form>
   
@@ -29,42 +31,32 @@
   </div>
   
   <div id='table'>
-  <div class='row' onclick="view(100)">  
-    <span class='no'>순번1</span>
-    <span class='subject'>제목1</span>
-    <span class='id'>작성자1</span>
-    <span class='mDate'>작성일1</span>
-    <span class='hit'>조회수1</span>
-  </div>
-
-  <div class='row' onclick="view(200)">
-    <span class='no'>순번2</span>
-    <span class='subject'>제목2</span>
-    <span class='id'>작성자2</span>
-    <span class='mDate'>작성일2</span>
-    <span class='hit'>조회수2</span>
-  </div> 
-
-  <div class='row' onclick="view(300)">
-    <span class='no'>순번3</span>
-    <span class='subject'>제목3</span>
-    <span class='id'>작성자3</span>
-    <span class='mDate'>작성일3</span>
-    <span class='hit'>조회수3</span>
-  </div>
+  
+  <c:forEach var="i" items="${list }"> <!-- 테그라이브러리를 사용한 반복문  req.setAttribute("list", xxxx) list에 해당한다. var 는 boardVo 타입의 데이타-->
+	  <div class='row' onclick="view(${i.serial})"> <!-- BoardVo.getSerial() 을 가저온것 -->  
+	    <span class='no'>${i.serial }</span>
+	    <span class='subject'>${i.subject }</span>
+	    <span class='id'>${i.id }</span>
+	    <span class='mDate'>${i.mDate }</span>
+	    <span class='hit'>${i.hit }</span>
+	  </div>
+  </c:forEach>  
 
 </div>
 
 <div id='page'>
-  <input type='button' value='이전' onclick = "go(1)">
-  
-  <input type='button' value='1' onclick = "go(1)">
-  <input type='button' value='2' onclick = "go(2)">
-  <input type='button' value='3' onclick = "go(3)">
-  <input type='button' value='4' onclick = "go(4)">
-  <input type='button' value='5' onclick = "go(5)">
-  
-  <input type='button' value='다음' onclick = "go(6)">
+	  <c:if test="${p.startPage>p.blocksize }">
+	    <input type='button' value='이전' onclick = "go(${p.startPage-1})">
+	  </c:if>
+	  
+	  <c:forEach var="i" begin="${p.startPage }" end="${p.endPage }">
+	  	<input type='button' value='${i }' onclick = "go(${i})"
+	  	 class="${(param.p.nowPage==i)? 'here':''}"	>
+	  </c:forEach>
+	  
+      <c:if test="${p.totPage>p.endPage }">
+        <input type='button' value='다음' onclick = "go(${p.endPage+1})">
+      </c:if>
 </div>
 </div>
 </body>

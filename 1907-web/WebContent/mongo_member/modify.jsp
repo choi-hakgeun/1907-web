@@ -1,3 +1,4 @@
+<%@page import="mongo.MongoMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,7 +18,8 @@
 	request.setCharacterEncoding("utf-8");
 	String findStr = request.getParameter("findStr");
 	String mId = request.getParameter("mId");
-	MongoMember
+	MongoMember mm = new MongoMember();
+	String msg = mm.modify(obj);
 %>
 </div>
 </body>

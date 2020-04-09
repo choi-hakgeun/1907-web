@@ -18,7 +18,7 @@
 		String findStr = request.getParameter("findStr");
 		String mId = request.getParameter("mId");
 		MongoMember mm = new MongoMember();
-		String msg = mm.delete(msg);
+		String msg = mm.delete(mId);
 	%>
 </div>
 <script>btnFunc();</script>
