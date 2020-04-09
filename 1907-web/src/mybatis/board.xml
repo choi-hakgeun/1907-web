@@ -4,9 +4,19 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="board">
-	<select id="select" parameterType="mybatis.Page" resultType="mybatis.BoardVo" >
-		select mId, mName, to_char(rDate, 'rrrr-mm-dd') rDate from member
-		where mName like '%${findStr}%' 
+
+	<select id='count' parameterType="bean.Page" resultType="Integer">
+	
+	select count(serial) cnt from board
+	where subject like '%${findStr}%'
+	or    content like '%${findStr}%'
+	</select>
+
+	<select id="select" parameterType="bean.Page" resultType="mybatis.BoardVo" >
+		select serial, id, subject, to_char(mDate, 'rrrr-mm-dd') mDate, hit 
+		from board
+		where subject like '%${findStr}%'
+		or    content like '%${findStr}%'
 		</select>
 	
 	<!-- 자바코드로 쓴다면 public void select(beanBoardVo vo) 와 같다

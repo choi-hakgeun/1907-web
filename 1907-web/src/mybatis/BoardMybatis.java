@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import bean.Page;
+
 public class BoardMybatis {
 	SqlSession sqlSession; //자바의 Connection 역할을 함.
 	
@@ -17,9 +19,9 @@ public class BoardMybatis {
 			list = sqlSession.selectList("board.select", p);
 			
 			for(BoardVo vo : list) {
-				System.out.println(vo.getmId());
-				System.out.println(vo.getmName());
-				System.out.println(vo.getrDate());
+				System.out.println(vo.getId());
+				System.out.println(vo.getpSerial());
+				System.out.println(vo.getmDate());
 				System.out.println("---------------------");
 			}
 			
@@ -34,7 +36,7 @@ public class BoardMybatis {
 	public static void main(String[] args) {
 		BoardMybatis bm = new BoardMybatis();
 		Page p = new Page();
-		p.setFindStr("t3");
+		p.setFindStr("h");
 		bm.select(p);
 	}
 

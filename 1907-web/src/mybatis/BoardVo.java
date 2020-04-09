@@ -1,36 +1,45 @@
 package mybatis;
 
 public class BoardVo {
-	String mId="";
-	String mName="";
-	String rDate="";
-	String grade="";
-	String pwd="";
+	int     serial;
+	String subject = "";
+	String content = "";
+	String mDate = "";	
+	String id = "";
+	String pwd = "";
+	int hit;
+	int pSerial;
 	
 	
-	public String getmId() {
-		return mId;
+	public int getSerial() {
+		return serial;
 	}
-	public void setmId(String mId) {
-		this.mId = mId;
+	public void setSerial(int serial) {
+		this.serial = serial;
 	}
-	public String getmName() {
-		return mName;
+	public String getSubject() {
+		return subject;
 	}
-	public void setmName(String mName) {
-		this.mName = mName;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
-	public String getrDate() {
-		return rDate;
+	public String getContent() {
+		return content;
 	}
-	public void setrDate(String rDate) {
-		this.rDate = rDate;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getGrade() {
-		return grade;
+	public String getmDate() {
+		return mDate;
 	}
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setmDate(String mDate) {
+		this.mDate = mDate;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getPwd() {
 		return pwd;
@@ -38,6 +47,20 @@ public class BoardVo {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public int getpSerial() {
+		return pSerial;
+	}
+	public void setpSerial(int pSerial) {
+		this.pSerial = pSerial;
+	}
+	
+	
 	
 
 }
