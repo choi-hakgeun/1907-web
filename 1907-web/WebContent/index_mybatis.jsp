@@ -14,6 +14,7 @@ request.setCharacterEncoding("utf-8");
 String inc="select.myba";  //./mybatis/select.jsp
 if(request.getParameter("inc") != null){
 	inc = request.getParameter("inc");
+	System.out.println("순서1 : "+inc);
 }
 %>
 

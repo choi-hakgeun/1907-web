@@ -18,9 +18,8 @@
   <fieldset id='attList'><legend>첨부할 파일 목록</legend></fieldset> <!-- 그 결과를 문자열로 만들어서 innerHTML(필드셋 안에)안에 넣음 -->
   <fieldset><legend>첨부된 파일 목록</legend>
     <c:forEach var='i' begin="1" end="5">
-      <div><!-- 자기자신을 포함하고있는 첫번째 노드[0] -->
-        <label>aaaa.png</label>
-        <input type='checkbox' name='delFile' value="aaa.png" onclick='delCheck(this)'> <!-- 자기자신을 나타내는(this) -->
+      <div><!-- 자기자신을 포함하고있는 첫번째 노드[0] 자식노드는 주석도 포함하고 있음.-->
+        <label>aaaa.png</label><input type='checkbox' name='delFile' value="aaaa.png" onclick='delCheck(this)'> <!-- 자기자신을 나타내는(this) -->
       </div>
     </c:forEach>
   

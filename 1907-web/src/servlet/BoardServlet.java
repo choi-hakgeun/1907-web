@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.BoardMybatisDao;
 import bean.Page;
+import mybatis.AttVo;
 import mybatis.BoardVo;
+import mybatis.FileUpload;
 
 @WebServlet("*.myba")
 public class BoardServlet extends HttpServlet{
@@ -49,6 +51,7 @@ public class BoardServlet extends HttpServlet{
 		
 		switch(tempUrl) {
 		case "select.myba":
+			System.out.println("스위치 케이스 select.myba");
 			select();
 			break;
 		case "view.myba":
@@ -84,11 +87,13 @@ public class BoardServlet extends HttpServlet{
 		Page p = new Page();
 		p.setFindStr(req.getParameter("findStr"));
 		
-		if(req.getParameter("nowPage") !=null) {
+		System.out.println("select() : " + p);		
+		
+		if(req.getParameter("nowPage") != "" && req.getParameter("nowPage") != null) {
 			p.setNowPage(Integer.parseInt(req.getParameter("nowPage")) );			
 		}
 		
-		List<BoardVo> list = dao.select(p);		
+		List<BoardVo> list = dao.select(p);
 		
 		req.setAttribute("list", list);
 		req.setAttribute("p", p);
@@ -112,8 +117,17 @@ public class BoardServlet extends HttpServlet{
 	
 	public void insertR() throws ServletException, IOException{
 		String path = url + "insert_result.jsp";
-		rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);
+		FileUpload fu = new FileUpload(req, resp);
+		HttpServletRequest newReq = fu.uploading();
+		
+		BoardVo vo = (BoardVo)newReq.getAttribute("vo");
+		List<AttVo> attList = (List<AttVo>)newReq.getAttribute("attList");
+		
+		String msg = dao.insert(vo, attList);
+		newReq.setAttribute("msg", msg);
+		
+		rd = newReq.getRequestDispatcher(path);
+		rd.forward(newReq, resp);
 	}
 	
 	public void modify() throws ServletException, IOException{

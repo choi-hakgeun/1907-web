@@ -17,8 +17,8 @@
   	  <input type='text' name='findStr' value='${param.findStr }'>
   	  <input type='button' value='검색' id='btnFind' />
   	  
-  	  <input type='hidden' name='nowPage' value='${param.nowPage }' />
-  	  <input type='text' name='serial' value='100' />
+  	  <input type='text' name='nowPage' value='${param.nowPage }' />
+  	  <input type='text' name='serial' />
   	</div>
   </form>
   
@@ -45,7 +45,7 @@
 </div>
 
 <div id='page'>
-	  <c:if test="${p.startPage>p.blocksize }">
+	  <c:if test="${p.startPage>p.blockSize }">
 	    <input type='button' value='이전' onclick = "go(${p.startPage-1})">
 	  </c:if>
 	  

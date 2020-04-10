@@ -12,6 +12,13 @@ let btnFunc = function(){
 		}
 	}
 	
+	if(getId('btnRegister') != null){
+		getId('btnRegister').onclick = function(){
+			frm.action = 'insertR.myba'; //url+'insertR.jsp'
+			frm.submit();
+		}
+	}
+	
 	if(getId('btnList') !=null){
 		getId('btnList').onclick = function(){
 			frm.enctype='';
@@ -87,9 +94,13 @@ let btnFunc = function(){
 	}
 	
 }
+
 let go = function(nowPage){
 	frm.nowPage.value = nowPage;
+	frm.action = 'select.myba';
+	frm.submit();
 }
+
 let view = function(serial){
 	frm.serial.value = serial;
 	frm.action = 'view.myba';
@@ -98,8 +109,19 @@ let view = function(serial){
 
 
 let delCheck = function(ev){//checkbox
-	let tag = ev.parentElement.childNodes[1]; //label
-	if(ev.checked){
+	let tag = ev.parentElement.childNodes[2];	//label
+	
+	/*let test1 = ev.parentElement;
+	let test2 = ev.parentElement.childNodes;
+	let outputString ="";
+	for(var i=0; i<test2.length; i++){
+        outputString += "자식노드: " + test2[i].nodeName + "<br />";
+    }
+	alert(test1);
+	alert(test2);
+	alert(outputString);*/
+
+	if(ev.checked){		
 		tag.style.textDecoration = "line-through";
 		tag.style.color='#f00';
 	}else{
