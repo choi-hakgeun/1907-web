@@ -13,26 +13,49 @@
 	</select>
 
 	<select id="select" parameterType="bean.Page" resultType="mybatis.BoardVo" >
-		select serial, id, subject, to_char(mDate, 'rrrr-mm-dd') mDate, hit 
-		from board
-		where subject like '%${findStr}%'
-		or    content like '%${findStr}%'
-		</select>
 	
-	<!-- 자바코드로 쓴다면 public void select(beanBoardVo vo) 와 같다
-						배열타입으로 가저온다, 파라메터, resultType="bean.BoardVo" ->반환타입
-						String 타입으로 들어가있는 파라메터가 '%${_parameter}%' 에 들어감.띄어쓰기 안됌
-						한건이면 하나가 넘어가고 N건이면 리스트로 바뀌어서 여러건이 넘어감.
-						 resultType 과 resultMap은 같이 사용할 수 없음. 
-						 mybatis.Page.getFindStr();
-						 --> 
+		select * from(
+			select rownum rno, M.* from(
+				select serial, 
+			   		lpad(' ', (level-1)*12, <![CDATA['&nbsp;&nbsp;']]>) || subject subject,
+			   		id, to_char(mdate, 'rrrr-mm-dd') mdate, hit
+				from board
+				where subject like '%${findStr}%'
+				or    content like '%${findStr}%'		
+		
+				connect by prior serial = pserial
+				start with pserial is null
+		
+				order SIBLINGS by serial desc)M
+		)where rno BETWEEN ${startNo} and ${endNo}
+		</select>
+		<!-- 
+		자바코드로 쓴다면 public void select(beanBoardVo vo) 와 같다
+		배열타입으로 가저온다, 파라메터, resultType="bean.BoardVo" ->반환타입
+		String 타입으로 들어가있는 파라메터가 '%${_parameter}%' 에 들어감.띄어쓰기 안됌
+		한건이면 하나가 넘어가고 N건이면 리스트로 바뀌어서 여러건이 넘어감.
+		resultType 과 resultMap은 같이 사용할 수 없음. 
+		mybatis.Page.getFindStr();
+		 -->
+		
+		
+		<!--본문글 입력하는 부분-->
+		<insert id='insert' parameterType='mybatis.BoardVo' >
+			insert into board(serial, id, pwd, subject, content, mdate, hit)
+			values(seq_board.nextval, #{id}, #{pwd}, #{subject}, #{content}, sysdate, 0)
+		</insert>
+		
+		<insert id='att_insert' parameterType='mybatis.AttVo'>
+			insert into boardAtt(serial, pserial, oriFile, sysFile)
+			values(seq_boardAtt.nextval, seq_board.currval, #{oriFile}, #{sysFile})
+		</insert>
+						 
 	
 	<!--
 	<select/>
 	
 	<resultMap />  간혹 테이블의 컬럼명과 vo의 필드명이 다를때 매칭시키기 편하게 할 수 있다. 
 	<update/>
-	<insert/>
 	<delete/>
 	-->	
 </mapper>

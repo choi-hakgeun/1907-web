@@ -28,8 +28,8 @@
   <input type='button' value='저장' id='btnRegister'>
   <input type='button' value='취소' id='btnList'>
   <br/>
-  <input type='hidden' name='nowPage' value='${param.nowPage }'>
-  <input type='hidden' name='findStr' value='${param.findStr }'>
+  <input type='text' name='nowPage' value='${param.nowPage }'>
+  <input type='text' name='findStr' value='${param.findStr }'>
   
   </form>
 </div>

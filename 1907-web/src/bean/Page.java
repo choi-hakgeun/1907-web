@@ -4,7 +4,7 @@ public class Page {
 	int totListSize; //검색된 결과의 전체 건수
 	int totPage; //전체패이지
 	int listSize=10; //목록갯수 가변적으로 바꿔주려면 매개변수를 주고 바꿔주면된다.
-	int blockSize=5; //페이지갯수
+	int blockSize=7; //페이지갯수
 	int nowPage=1;
 	int startNo;
 	int endNo;
