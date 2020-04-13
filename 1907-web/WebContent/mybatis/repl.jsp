@@ -23,7 +23,7 @@
   <br/>
   <input type='text' name='nowPage' value='${param.nowPage }'>
   <input type='text' name='findStr' value='${param.findStr }'>
-  <input type='text' name='serial' value='1'>
+  <input type='text' name='pSerial' value='${param.pSerial }'>
   
   </form>
 </div>

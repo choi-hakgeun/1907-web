@@ -35,7 +35,7 @@
   <c:forEach var="i" items="${list }"> <!-- 테그라이브러리를 사용한 반복문  req.setAttribute("list", xxxx) list에 해당한다. var 는 boardVo 타입의 데이타-->
 	  <div class='row' onclick="view(${i.serial})"> <!-- BoardVo.getSerial() 을 가저온것 -->  
 	    <span class='no'>${i.serial }</span>
-	    <span class='subject'>${i.subject }</span>
+	    <span class='subject'>${i.subject } ${(i.attCnt>0) ? [i.attCnt ] : ''}</span>
 	    <span class='id'>${i.id }</span>
 	    <span class='mDate'>${i.mDate }</span>
 	    <span class='hit'>${i.hit }</span>
