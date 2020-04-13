@@ -51,9 +51,9 @@ let btnFunc = function(){
 	}
 	
 	if(getId("btnModify") !=null){
-		getId("btnModify").onclick = function(){
-			frm.action = 'modify.myba'; //frm은 뷰의 폼의 이름
-			frm.submit();
+		getId("btnModify").onclick = function(){			
+				frm.action = 'modify.myba'; //frm은 뷰의 폼의 이름
+				frm.submit();			
 		}
 		/*$('#btnModify').click(function(){
 			제이쿼리 타입
@@ -62,8 +62,12 @@ let btnFunc = function(){
 	
 	if(getId("btnUpdate") !=null){
 		getId("btnUpdate").onclick = function(){
-			frm.action = 'modifyR.myba';
-			frm.submit();
+			let pwd = prompt("수정하려면 암호를...");
+			if(pwd != null && pwd != ''){
+				frm.pwd.value = pwd;
+				frm.action = 'modifyR.myba';
+				frm.submit();
+			}
 		}				
 	}
 	

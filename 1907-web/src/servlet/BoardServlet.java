@@ -90,7 +90,7 @@ public class BoardServlet extends HttpServlet{
 		System.out.println("select() : " + p);		
 		
 		if(req.getParameter("nowPage") != "" && req.getParameter("nowPage") != null) {
-			p.setNowPage(Integer.parseInt(req.getParameter("nowPage")) );			
+			p.setNowPage(Integer.parseInt(req.getParameter("nowPage")) );
 		}
 		
 		List<BoardVo> list = dao.select(p);
@@ -104,6 +104,14 @@ public class BoardServlet extends HttpServlet{
 	
 	public void view() throws ServletException, IOException{
 		String path = url+"view.jsp";
+		int serial = Integer.parseInt(req.getParameter("serial"));
+		
+		BoardVo vo = dao.view(serial, 'v');
+		List<AttVo> attList = dao.getAttList(serial);
+		
+		req.setAttribute("vo", vo);
+		req.setAttribute("attList", attList);
+		
 		rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}
@@ -121,7 +129,7 @@ public class BoardServlet extends HttpServlet{
 		HttpServletRequest newReq = fu.uploading();
 		
 		BoardVo vo = (BoardVo)newReq.getAttribute("vo");
-		List<AttVo> attList = (List<AttVo>)newReq.getAttribute("attList");
+		List<AttVo> attList = (List<AttVo>)newReq.getAttribute("attList");		
 		
 		String msg = dao.insert(vo, attList);
 		newReq.setAttribute("msg", msg);
@@ -132,19 +140,49 @@ public class BoardServlet extends HttpServlet{
 	
 	public void modify() throws ServletException, IOException{
 		String path = url + "modify.jsp";
+		
+		int serial = Integer.parseInt(req.getParameter("serial"));
+		BoardVo vo = dao.view(serial, ' ');
+		List<AttVo> attList = dao.getAttList(serial);
+		
+		req.setAttribute("vo", vo);
+		req.setAttribute("attList", attList);		
+		
 		rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
+		
 	}
 	
 	public void modifyR() throws ServletException, IOException{
 		String path = url + "modify_result.jsp";
-		rd = req.getRequestDispatcher(path);
-		rd.forward(req, resp);
+		
+		FileUpload fu = new FileUpload(req, resp);
+		HttpServletRequest newReq = fu.uploading();
+		
+		BoardVo vo = (BoardVo)newReq.getAttribute("vo");
+		List<AttVo> attList = (List<AttVo>)newReq.getAttribute("attList");
+		List<AttVo> delList = (List<AttVo>)newReq.getAttribute("delList");
+
+		String msg = dao.modify(vo, attList, delList);
+		newReq.setAttribute("msg", msg);		
+		
+		rd = newReq.getRequestDispatcher(path);
+		rd.forward(newReq, resp);
 	}
 	
 	public void deleteR() throws ServletException, IOException{
 		String path = url + "delete_result.jsp";
-		rd = req.getRequestDispatcher(path);
+		int serial = Integer.parseInt(req.getParameter("serial"));
+		String pwd = req.getParameter("pwd");
+		
+		BoardVo vo = new BoardVo();
+		vo.setSerial(serial);
+		vo.setPwd(pwd);
+		
+		String msg = dao.delete(vo);
+		req.setAttribute("msg", msg);
+		
+		rd = req.getRequestDispatcher(path);		
 		rd.forward(req, resp);
 	}
 	
@@ -156,6 +194,17 @@ public class BoardServlet extends HttpServlet{
 	
 	public void replR() throws ServletException, IOException{
 		String path = url + "repl_result.jsp";
+		
+		FileUpload fu = new FileUpload(req, resp);
+		req = fu.uploading();
+		
+		BoardVo vo = (BoardVo)req.getAttribute("vo");
+		List<AttVo> attList = (List<AttVo>)req.getAttribute("attList");
+		
+		String msg = dao.repl(vo, attList);
+		req.setAttribute("msg", msg);
+		
+		
 		rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}

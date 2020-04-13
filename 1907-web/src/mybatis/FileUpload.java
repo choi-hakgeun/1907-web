@@ -90,7 +90,9 @@ public class FileUpload {
             	   p.setFindStr(v);
             	   break;              
                case "nowPage":
-            	   p.setNowPage(Integer.parseInt(v));            	   
+            	   if(v != null && v != "") {
+            		   p.setNowPage(Integer.parseInt(v));
+            	   }
             	   break;
                } // end of switch
             } else { // <input type='file'/>

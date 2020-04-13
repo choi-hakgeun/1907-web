@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <div id='mybatis'>
 <h2>자유 게시물 수정</h2>
 <form name='frm' method='post' enctype='multipart/form-data'>
   <label>작성자</label>
-  <input type='text' name='id' value='hong'><br/>
+  <input type='text' name='id' value='${vo.id }'><br/>
   
   <label>제목</label>
-  <input type='text' name='subject' value='방가루~~' /><br/>
-  <textarea rows="10" cols="70" name="content">방가~~</textarea><br/>
+  <input type='text' name='subject' value='${vo.subject }' /><br/>
+  <textarea rows="10" cols="70" name="content">${vo.content }</textarea><br/>
   
 
   <label>파일 첨부</label>
@@ -17,9 +19,9 @@
   
   <fieldset id='attList'><legend>첨부할 파일 목록</legend></fieldset> <!-- 그 결과를 문자열로 만들어서 innerHTML(필드셋 안에)안에 넣음 -->
   <fieldset><legend>첨부된 파일 목록</legend>
-    <c:forEach var='i' begin="1" end="5">
+    <c:forEach var='i' items='${attList }'>
       <div><!-- 자기자신을 포함하고있는 첫번째 노드[0] 자식노드는 주석도 포함하고 있음.-->
-        <label>aaaa.png</label><input type='checkbox' name='delFile' value="aaaa.png" onclick='delCheck(this)'> <!-- 자기자신을 나타내는(this) -->
+        <span>${i.oriFile }</span><input type='checkbox' name='delFile' value="${i.sysFile }" onclick='delCheck(this)'> <!-- 실제 저장된 파일명을 벨류값을 가지고 delFile에 저장, 자기자신을 나타내는(this) -->
       </div>
     </c:forEach>
   
@@ -31,6 +33,6 @@
   <input type='text' name='pwd' value='1' /><br/>
   <input type='text' name='nowPage' value='${param.nowPage }'>
   <input type='text' name='findStr' value='${param.findStr }'>
-  
+  <input type='text' name='serial' value='${vo.serial }'>
   </form>
 </div>

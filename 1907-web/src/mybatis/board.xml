@@ -18,7 +18,7 @@
 			select rownum rno, M.* from(
 				select serial, 
 			   		lpad(' ', (level-1)*12, <![CDATA['&nbsp;&nbsp;']]>) || subject subject,
-			   		id, to_char(mdate, 'rrrr-mm-dd') mdate, hit
+			   		id, to_char(mdate, 'rrrr-mm-dd') mdate, hit, getAttCnt(serial) attCnt
 				from board
 				where subject like '%${findStr}%'
 				or    content like '%${findStr}%'		
@@ -38,7 +38,20 @@
 		mybatis.Page.getFindStr();
 		 -->
 		
+		<select id='view' parameterType='Integer' resultType='mybatis.BoardVo'>
+			select serial, id, pwd, subject, content, hit, pserial, to_char(mdate, 'rrrr-mm-dd') mdate
+			from board
+			where serial = ${_parameter}
+		</select>
+		<select id='att_list' parameterType='Integer' resultType='mybatis.AttVo'>
+			select serial, pserial, orifile, sysfile
+			from boardAtt
+			where pserial = ${_parameter}
+		</select>
 		
+		<select id='repl_cnt' parameterType='Integer' resultType='Integer'>
+			select count(serial) cnt from board where pserial='${_parameter}'
+		</select>
 		<!--본문글 입력하는 부분-->
 		<insert id='insert' parameterType='mybatis.BoardVo' >
 			insert into board(serial, id, pwd, subject, content, mdate, hit)
@@ -49,7 +62,34 @@
 			insert into boardAtt(serial, pserial, oriFile, sysFile)
 			values(seq_boardAtt.nextval, seq_board.currval, #{oriFile}, #{sysFile})
 		</insert>
-						 
+		
+		<insert id = 'repl' parameterType='mybatis.BoardVo'>
+			insert into board(serial, id, pwd, subject, content, mdate, hit, pSreial)
+			values(seq_board.nextval, #{id}, #{pwd}, #{subject}, #{content}, sysdate, 0, #{pSerial} )
+		</insert>
+		<!--조회수 증가-->
+		<update id='hit_up' parameterType='mybatis.BoardVo'>
+			update board set hit=hit+1 where serial=${serial}<!--${_parameter} 로 해도됨 $를 쓸때는 sql을 사용한 불법적인 프로세스가 유입될 가능성이 있음. #을 쓰면 따옴표가 붙어서 불법적인 프로그램이 실행 안될가능성이 높음.-->
+		</update>
+		
+		<!--수정-->
+		<update id='update' parameterType='mybatis.BoardVo'>
+			update board set subject=#{subject}, content=#{content}
+			where serial=${serial} and pwd=#{pwd}
+		</update>
+		<!-- 시리얼은 숫자라 $ 든 # 이든 같음-->
+		<insert id='att_insert2' parameterType='mybatis.AttVo'>
+			insert into boardAtt(serial, pserial, oriFile, sysFile)
+			values(seq_boardAtt.nextval, #{serial}, #{oriFile}, #{sysFile})
+		</insert>
+		
+		<delete id='delete' parameterType='mybatis.BoardVo'>
+		 	delete from board where serial=#{serial} and pwd=#{pwd}
+		</delete>
+		
+		<delete id='att_delete' parameterType='mybatis.AttVo'>
+			delete from boardAtt where sysfile = #{sysFile} or pserial = ${serial}
+		</delete>
 	
 	<!--
 	<select/>
