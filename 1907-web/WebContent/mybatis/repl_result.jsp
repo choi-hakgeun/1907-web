@@ -9,6 +9,6 @@
 	</form>
 	<script>
 		alert('${msg}')
-		go();
+		go('${p.nowPage}');
 	</script>
 </div>

@@ -14,10 +14,10 @@
   <form name='frm' method='post' id='frm_select' >
   	<input type='button' value='입력' id='btnInsert' />
   	<div>
-  	  <input type='text' name='findStr' value='${param.findStr }'>
+  	  <input type='text' name='findStr' value='${(empty p.findStr)? param.findStr : p.findStr }'>
   	  <input type='button' value='검색' id='btnFind' />
   	  
-  	  <input type='text' name='nowPage' value='${param.nowPage }' />
+  	  <input type='text' name='nowPage' value='${(empty p.nowPage)? "1" : p.nowPage }' />
   	  <input type='text' name='serial' />
   	</div>
   </form>

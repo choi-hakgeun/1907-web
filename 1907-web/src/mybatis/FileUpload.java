@@ -91,6 +91,7 @@ public class FileUpload {
             	   break;              
                case "nowPage":
             	   if(v != null && v != "") {
+            		   System.out.println("fileupload nowPage" + v);
             		   p.setNowPage(Integer.parseInt(v));
             	   }
             	   break;

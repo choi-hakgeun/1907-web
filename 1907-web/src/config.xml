@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 </environments>
 
 <mappers>
-	<mapper resource="mybatis/board.xml"/>
+	<mapper resource="mybatis/board.xml"/>  <!--보드에서 에러나면 다른 메퍼도 실행되지 않음, 삭제 또는 주석처리. -->
+	<mapper resource="mybatis/dynamic.xml"/>
 </mappers>
 </configuration>

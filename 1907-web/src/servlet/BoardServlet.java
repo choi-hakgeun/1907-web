@@ -85,12 +85,11 @@ public class BoardServlet extends HttpServlet{
 		String path = url+"select.jsp";
 		
 		Page p = new Page();
-		p.setFindStr(req.getParameter("findStr"));
-		
-		System.out.println("select() : " + p);		
+		p.setFindStr(req.getParameter("findStr"));			
 		
 		if(req.getParameter("nowPage") != "" && req.getParameter("nowPage") != null) {
 			p.setNowPage(Integer.parseInt(req.getParameter("nowPage")) );
+			System.out.println("select() : " + p);
 		}
 		
 		List<BoardVo> list = dao.select(p);

@@ -8,7 +8,7 @@
 	    <input type='button' value='목록으로' id='btnList'>
 	</form>
 	<script>
-		alert('${msg}')
-		go();
+	alert('${msg}');
+	go('${p.nowPage}');
 	</script>
 </div>

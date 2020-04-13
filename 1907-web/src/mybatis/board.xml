@@ -64,7 +64,7 @@
 		</insert>
 		
 		<insert id = 'repl' parameterType='mybatis.BoardVo'>
-			insert into board(serial, id, pwd, subject, content, mdate, hit, pSreial)
+			insert into board(serial, id, pwd, subject, content, mdate, hit, pSerial)
 			values(seq_board.nextval, #{id}, #{pwd}, #{subject}, #{content}, sysdate, 0, #{pSerial} )
 		</insert>
 		<!--조회수 증가-->
