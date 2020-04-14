@@ -69,5 +69,31 @@
 		</trim>		
 	</select>
 	
+	<select id='foreach_test' parameterType='list' resultType='mybatis.BoardVo'>
+		select * from board
+		<where>
+			id in
+			<foreach collection='array' item='data' open='(' close=')' separator=','>
+				#{data}
+			</foreach>
+		</where>
+		 <!--where id in ( 'a', 'b', 'c', 'd' )-->
+	</select>
+	
+	<!--프로시저 호출-->
+	<select id='pl_sql' statementType='CALLABLE' parameterType='mybatis.BoardVo' resultType='mybatis.BoardVo' >
+		{call hr.get_boardVo(		
+			#{serial,  mode=IN,  jdbcType=INTEGER},
+			#{subject, mode=OUT, jdbcType=VARCHAR},
+			#{id, 	   mode=OUT, jdbcType=VARCHAR},
+			#{mDate,   mode=OUT, jdbcType=VARCHAR},
+			#{hit,     mode=OUT, jdbcType=INTEGER}
+			)
+		}
+	
+	
+	</select>
+	
+	
 
 </mapper>

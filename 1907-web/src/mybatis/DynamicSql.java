@@ -137,8 +137,31 @@ public class DynamicSql {
 		 * -- index : collection의 종류가 Map이면 key, collection의 종류가 List이면 index
 		 * -- item : collection의 종류가 Map이면 value, collection의 종류가 List 이면 value
 		 */
+		session = BoardFactory.getFactory().openSession();
+		String findStr = "hong kim,lee";		
+		String[] value = findStr.split(",| "); //스플릿으로 나누어서 배열에 담음(?)
+			
+		List<BoardVo> list = session.selectList("dynamic.foreach_test", value);
+		for(BoardVo v : list) {
+			System.out.println(v.getId() + " - " + v.getSubject());
+		}
 		
+		session.close();
 	}
+	public void plSqlTest() {
+		session = BoardFactory.getFactory().openSession();		
+		
+		BoardVo vo = new BoardVo();
+		vo.setSerial(1);
+		session.selectOne("dynamic.pl_sql", vo);
+		System.out.println(vo.getId());
+		System.out.println(vo.getSubject());
+		System.out.println(vo.getmDate());
+		System.out.println(vo.getHit());
+		
+		session.close();
+	}
+	
 	
 	public static void main(String[] args) {
 		DynamicSql d = new DynamicSql();
@@ -146,7 +169,9 @@ public class DynamicSql {
 		//d.chooseTest();
 		//d.whereTest();
 		//d.setTest();
-		d.trimTest();
+		//d.trimTest();
+		//d.foreachTest();
+		d.plSqlTest();
 
 	}
 
