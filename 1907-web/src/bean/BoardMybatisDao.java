@@ -21,7 +21,7 @@ public class BoardMybatisDao {
 		List<BoardVo> list = null;		
 		try {
 			
-			int totList = sqlSession.selectOne("board.count", p);			
+			int totList = sqlSession.selectOne("board.count", p);
 			p.setTotListSize(totList);
 			p.pageCompute();
 			list = sqlSession.selectList("board.select", p);
